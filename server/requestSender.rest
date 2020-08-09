@@ -1,0 +1,27 @@
+POST http://localhost:3000/api/auth/signup
+Content-Type: application/json
+
+{
+  "username": "Bobi",
+  "password": "Paco123",
+  "email": "bobi@gmail.com"
+}
+
+###
+
+POST http://localhost:3000/api/auth/signin
+Content-Type: application/json
+
+{
+  "email": "paco@gmail.com",
+  "password": "Paco123"
+}
+
+###
+POST http://localhost:3000/api/users/5f2fd45d298e1f00a4944710/posts
+Content-Type: application/json
+
+{
+  "text": "Ja sam Koraljka i štela bi prodata svoju peglu"
+}
+
