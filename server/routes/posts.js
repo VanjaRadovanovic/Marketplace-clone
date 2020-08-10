@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const { createPost } = require('../handlers/posts');
+const { createPost, getPost, deletePost } = require('../handlers/posts');
 
-router.route('/').post(createPost)
+router.post('/', createPost);
+
+router.get('/:message_id', getPost);
+
+router.delete('/:message_id', deletePost);
 
 module.exports = router;

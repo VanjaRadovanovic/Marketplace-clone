@@ -2,9 +2,9 @@ POST http://localhost:3000/api/auth/signup
 Content-Type: application/json
 
 {
-  "username": "Bobi",
+  "username": "Niko",
   "password": "Paco123",
-  "email": "bobi@gmail.com"
+  "email": "niko@gmail.com"
 }
 
 ###
@@ -25,3 +25,8 @@ Content-Type: application/json
   "text": "Ja sam Koraljka i štela bi prodata svoju peglu"
 }
 
+###
+GET http://localhost:3000/api/users/5f2fd45d298e1f00a4944710/posts/5f31b000e9b6fe284ce5b6a8
+
+###
+DELETE http://localhost:3000/api/users/5f2fd45d298e1f00a4944710/posts/5f31b000e9b6fe284ce5b6a8

@@ -21,9 +21,29 @@ exports.createPost = async function (req, res, next) {
 }
 
 exports.getPost = async function (req, res, next) {
+  try {
+    let post = await db.Post.findById(req.params.message_id);
 
+    res.status(200).json(post)
+
+  } catch (error) {
+    error.message = 'Message not found';
+    next(error);
+  }
 }
 
 exports.deletePost = async function (req, res, next) {
-
+  try {
+    let post = await db.Post.findById(req.params.message_id);
+    console.log(post.user == req.params.id, 'user id')
+    if (post.user == req.params.id) {
+      await db.Post.deleteOne(post);
+      res.status(200).json(post);
+    } else {
+      return res.json({ message: 'U cant delete other peoples posts' })
+    }
+  } catch (error) {
+    error.message = 'Cant find post';
+    next(error);
+  }
 }
