@@ -13,17 +13,21 @@ POST http://localhost:3000/api/auth/signin
 Content-Type: application/json
 
 {
-  "email": "paco@gmail.com",
+  "email": "pacos@gmail.com",
   "password": "Paco123"
 }
 
 ###
-POST http://localhost:3000/api/users/5f2fd45d298e1f00a4944710/posts
+POST http://localhost:3000/api/users/5f2fca1dc300361d6842d11f/posts
 Content-Type: application/json
 
 {
+  "Authorization:Bearer hsfdhsdfhfdsht3h4rw43z3.asdgfasdgasdgqwgqw.gqweg32fwdfweq"
   "text": "Ja sam Koraljka i štela bi prodata svoju peglu"
 }
+
+###
+GET http://localhost:3000/api/posts
 
 ###
 GET http://localhost:3000/api/users/5f2fd45d298e1f00a4944710/posts/5f31b000e9b6fe284ce5b6a8
