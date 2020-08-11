@@ -11,7 +11,7 @@ const db = require('./models');
 
 app.use(bodyParser.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 app.use('/api/auth', authRoutes);
 
