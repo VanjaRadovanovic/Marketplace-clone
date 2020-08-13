@@ -13,11 +13,7 @@ function AuthForm(props) {
 
     const fetchData = async () => {
       try {
-        let results = await axios.get('http://localhost:4000/api/posts', {
-          method: 'GET',
-          mode: 'cors',
-          headers: { 'Access-Control-Allow-Origin': true },
-        });
+        let results = await axios.get('/api/posts');
         console.log(results.data)
       } catch (error) {
         console.log(error, 'error')
