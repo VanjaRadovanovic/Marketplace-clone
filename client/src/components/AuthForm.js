@@ -1,20 +1,23 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AuthForm.css';
 import IsEmail from 'validator/lib/isEmail';
 import axios from 'axios';
+import { setCurrentUser } from '../store/actions/auth';
+import { useDispatch } from 'react-redux';
+import { SET_CURRENT_USER } from '../store/actionTypes';
 
 function AuthForm(props) {
 
   const [formData, setFormData] = useState({});
   const [errMessages, setErrMessages] = useState({});
   const [errOutline, setErrOutline] = useState({})
-
+  const [takenData, setTakenData] = useState({});
+  const dispatch = useDispatch();
   useEffect(() => {
-
     const fetchData = async () => {
       try {
-        let results = await axios.get('/api/posts');
-        console.log(results.data)
+        let results = await axios.get('/api/auth/otherRegisterData');
+        setTakenData(results.data);
       } catch (error) {
         console.log(error, 'error')
       }
@@ -39,6 +42,7 @@ function AuthForm(props) {
     if (props.signup) {
       if (formData.password !== formData.repeatPassword) return passwordsDontMach();
       data = formData;
+      setFormData({ ...formData, email: '' })
     } else {
       data = {
         email: formData.email,
@@ -46,19 +50,59 @@ function AuthForm(props) {
       }
     }
     console.log(data);
-    setFormData({ username: '', email: '', password: '', repeatPassword: '', imageUrl: '' });
+    setFormData({ ...formData, username: '', password: '', repeatPassword: '', imageUrl: '' });
     setErrOutline({});
     setErrMessages({});
+
+    if (props.signup) {
+      signingupUser(data);
+    } else {
+      loginginUser(data);
+    }
+  }
+
+  const signingupUser = async (data) => {
+    try {
+      const user = await axios.post('/api/auth/signup', data);
+      console.log(user);
+      dispatch({
+        type: SET_CURRENT_USER,
+        user: user.data
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const loginginUser = async (data) => {
+    try {
+      const user = await axios.post('/api/auth/signin', data);
+      console.log(user.data)
+      dispatch({
+        type: SET_CURRENT_USER,
+        user: user.data
+      })
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   const emailOnChange = (e) => {
     let email = e.target.value
     setFormData({ ...formData, email: e.target.value });
+
     if (!IsEmail(email) && email) {
       setErrMessages({ ...errMessages, email: 'This email is not valid' });
       setErrOutline({ ...errOutline, email: 'is-invalid' });
       return
     } else if (IsEmail(email)) {
+      let isTaken = takenData.emails.filter((val) => val === email).length > 0;
+      if (isTaken && props.signup) {
+        setErrMessages({ ...errMessages, email: 'This email is already taken' });
+        setErrOutline({ ...errOutline, email: 'is-invalid' });
+        return
+      }
       setErrMessages({ ...errMessages, email: '' });
       setErrOutline({ ...errOutline, email: 'is-valid' });
       return
@@ -89,13 +133,31 @@ function AuthForm(props) {
     setErrOutline({ ...errOutline, password: '', repeatPassword: '' });
   }
 
+  const onChangeUsername = (e) => {
+    let username = e.target.value;
+    setFormData({ ...formData, username: e.target.value })
+    if (username === '') {
+      setErrMessages({ ...errMessages, username: '' });
+      setErrOutline({ ...errOutline, username: '' });
+      return
+    }
+    let isTaken = takenData.usernames.filter((val) => val === username).length > 0;
+    if (isTaken) {
+      setErrMessages({ ...errMessages, username: 'This username is already taken' });
+      setErrOutline({ ...errOutline, username: 'is-invalid' });
+      return
+    }
+    setErrMessages({ ...errMessages, username: '' });
+    setErrOutline({ ...errOutline, username: 'is-valid' });
+  }
+
   return (
     <div className="auth-form-container">
       <form className="auth-form" onSubmit={handleSubmit}>
         {props.signup ? (
           <div className="form-group">
             <label htmlFor="username-label">Username</label>
-            <input type="text" className={`form-control ${errOutline.username}`} id="username-label" value={formData.username} onChange={e => setFormData({ ...formData, username: e.target.value })} />
+            <input type="text" className={`form-control ${errOutline.username}`} id="username-label" value={formData.username} onChange={e => onChangeUsername(e)} />
             <small id="usernameHelp" className="form-text text-muted">{errMessages.username}</small>
           </div>
         ) : null}
