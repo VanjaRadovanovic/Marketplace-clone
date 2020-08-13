@@ -7,3 +7,7 @@ export function setCurrentUser(user) {
     user
   }
 }
+
+export function authUser(type, userData) {
+
+}

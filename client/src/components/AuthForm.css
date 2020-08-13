@@ -1,0 +1,34 @@
+.auth-form{
+  width: 600px;
+  background-color: rgba(0, 0, 0, .03);
+  padding: 40px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, .2);
+}
+
+.auth-form-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.auth-form small{
+  text-align: start;
+}
+
+.form-group{
+  display: grid;
+}
+
+.form-group label{
+  justify-self: start;
+}
+
+#auth-submit{
+  width: 20%;
+  min-width: 80px;
+}
+
+.auth-form small{
+  color: red !important;
+}

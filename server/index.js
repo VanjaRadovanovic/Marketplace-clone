@@ -17,7 +17,7 @@ app.use('/api/auth', authRoutes);
 
 app.use('/api/users/:id/posts', loginRequired, ensureCorrectUser, postRoutes);
 
-app.use('/api/posts', loginRequired, async function (req, res, next) {
+app.use('/api/posts', async function (req, res, next) {
   try {
     let posts = await db.Post.find().populate('user', { username: true, profileImageUrl: true });
     return res.status(200).json(posts);
