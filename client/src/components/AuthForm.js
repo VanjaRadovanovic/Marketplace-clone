@@ -3,7 +3,7 @@ import './AuthForm.css';
 import IsEmail from 'validator/lib/isEmail';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { SET_CURRENT_USER } from '../store/actionTypes';
+import { SET_CURRENT_USER, GET_ALL_POSTS } from '../store/actionTypes';
 
 function AuthForm(props) {
 
@@ -112,11 +112,16 @@ function AuthForm(props) {
   const loginginUser = async (data) => {
     try {
       const user = await axios.post('/api/auth/signin', data);
-      console.log(user.data)
-      dispatch({
+      console.log(user.data.token);
+      await dispatch({
         type: SET_CURRENT_USER,
         user: user.data
       });
+      await dispatch({
+        type: GET_ALL_POSTS,
+        id: user.data.id,
+        token: user.data.token
+      })
       console.log('redirecting')
     } catch (error) {
       console.log(error);

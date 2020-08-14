@@ -1,8 +1,17 @@
 import axios from 'axios';
 
-export function callApi(method, path, data) {
+//const token = useSelector(state => state.currentUser.user.token);
+
+
+export function callApi(method, path, data, token) {
+  console.log(token, 'token in api')
+  const axiosPosts = axios.create({
+    headers: {
+      authorization: `Bearer ${token}`
+    }
+  })
   return new Promise((resolve, reject) => {
-    return axios[method](path, data)
+    return axiosPosts[method](path, data)
       .then(res => {
         return resolve(res.data);
       })

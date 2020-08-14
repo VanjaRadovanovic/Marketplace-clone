@@ -2,10 +2,27 @@ const mongoose = require('mongoose');
 const User = require('./user');
 
 const postSchema = new mongoose.Schema({
-  text: {
+  title: {
     type: String,
     required: true,
-    maxlength: 160
+    maxlength: 100
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  category: {
+    type: Array,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true,
+    maxlength: 400
+  },
+  location: {
+    type: String,
+    required: true
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

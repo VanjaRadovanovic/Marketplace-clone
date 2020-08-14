@@ -3,7 +3,11 @@ const db = require('../models');
 exports.createPost = async function (req, res, next) {
   try {
     let post = await db.Post.create({
-      text: req.body.text,
+      title: req.body.title,
+      price: req.body.price,
+      category: req.body.category,
+      description: req.body.description,
+      location: req.body.location,
       user: req.params.id
     })
     let foundUser = await db.User.findById(req.params.id);
