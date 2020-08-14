@@ -1,0 +1,21 @@
+.create-post-button{
+  border: none;
+  width: 100%;
+  background-color: #E7F3FF;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-top: 10px;
+  transition: background-color 150ms;
+}
+
+.create-post-button > div{
+  margin-bottom: 2px;
+  color: #1377E8;
+}
+
+.create-post-button:hover{
+  background-color: #DAE6F2;
+}

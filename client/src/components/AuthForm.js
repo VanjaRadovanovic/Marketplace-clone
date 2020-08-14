@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './AuthForm.css';
 import IsEmail from 'validator/lib/isEmail';
 import axios from 'axios';
-import { setCurrentUser } from '../store/actions/auth';
 import { useDispatch } from 'react-redux';
 import { SET_CURRENT_USER } from '../store/actionTypes';
 
@@ -29,27 +28,63 @@ function AuthForm(props) {
     fetchData();
   }, [props.signup]);
 
-
-
   const passwordsDontMach = () => {
     setErrMessages({ ...errMessages, password: "Passwords don't match", repeatPassword: "Passwords don't match" });
     setErrOutline({ ...errOutline, password: 'is-invalid', repeatPassword: 'is-invalid' });
+  }
+
+  const requiredDataErr = () => {
+    let setErrorData = {};
+    let setOutlineData = {}
+    if (props.signup) {
+      if (!formData.username) {
+        setErrorData = { ...setErrorData, username: "Username is required" }
+        setOutlineData = { ...setOutlineData, username: 'is-invalid' }
+      }
+      if (!formData.password) {
+        setErrorData = { ...setErrorData, password: "Password is required" }
+        setOutlineData = { ...setOutlineData, password: 'is-invalid' }
+      }
+      if (!formData.repeatPassword) {
+        setErrorData = { ...setErrorData, repeatPassword: "Repeating password is required" }
+        setOutlineData = { ...setOutlineData, repeatPassword: 'is-invalid' }
+      }
+      if (!formData.email) {
+        setErrorData = { ...setErrorData, email: "Email is required" }
+        setOutlineData = { ...setOutlineData, email: 'is-invalid' }
+      }
+    } else {
+      if (!formData.email) {
+        setErrorData = { ...setErrorData, email: "Email is required" }
+        setOutlineData = { ...setOutlineData, email: 'is-invalid' }
+      }
+      if (!formData.password) {
+        setErrorData = { ...setErrorData, password: "Password is required" }
+        setOutlineData = { ...setOutlineData, password: 'is-invalid' }
+      }
+    }
+
+    setErrMessages(setErrorData);
+    setErrOutline(setOutlineData);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let data;
     if (props.signup) {
+      if (!formData.username || !formData.password || !formData.repeatPassword || !formData.email) return requiredDataErr();
       if (formData.password !== formData.repeatPassword) return passwordsDontMach();
-      data = formData;
+      if (!formData.imageUrl)
+        data = formData;
       setFormData({ ...formData, email: '' })
     } else {
+      if (!formData.password || !formData.email) return requiredDataErr()
       data = {
         email: formData.email,
         password: formData.password
       }
     }
-    console.log(data);
+    console.log(data, 'dataatatatata');
     setFormData({ ...formData, username: '', password: '', repeatPassword: '', imageUrl: '' });
     setErrOutline({});
     setErrMessages({});
@@ -81,9 +116,12 @@ function AuthForm(props) {
       dispatch({
         type: SET_CURRENT_USER,
         user: user.data
-      })
+      });
+      console.log('redirecting')
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      setErrMessages({ ...errMessages, loginFailed: "Email or password are incorrect" });
+      setErrOutline({ ...errOutline, email: 'is-invalid', password: "is-invalid" });
     }
 
   }
@@ -97,7 +135,7 @@ function AuthForm(props) {
       setErrOutline({ ...errOutline, email: 'is-invalid' });
       return
     } else if (IsEmail(email)) {
-      let isTaken = takenData.emails.filter((val) => val === email).length > 0;
+      let isTaken = takenData === {} ? takenData.emails.filter((val) => val === email).length > 0 : true;
       if (isTaken && props.signup) {
         setErrMessages({ ...errMessages, email: 'This email is already taken' });
         setErrOutline({ ...errOutline, email: 'is-invalid' });
@@ -107,7 +145,7 @@ function AuthForm(props) {
       setErrOutline({ ...errOutline, email: 'is-valid' });
       return
     }
-    setErrMessages({ ...setErrMessages, email: '' });
+    setErrMessages({ ...errMessages, email: '' });
     setErrOutline({ ...errOutline, email: '' });
   }
 
@@ -154,6 +192,7 @@ function AuthForm(props) {
   return (
     <div className="auth-form-container">
       <form className="auth-form" onSubmit={handleSubmit}>
+        <small>{errMessages.loginFailed}</small>
         {props.signup ? (
           <div className="form-group">
             <label htmlFor="username-label">Username</label>
@@ -181,7 +220,7 @@ function AuthForm(props) {
             <div className="form-group">
               <label htmlFor="imageUrl-label">Image Url</label>
               <input type="text" className="form-control" id="imageUrl-label" value={formData.imageUrl} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} />
-              <small id="imageUrlHelp" className="form-text text-muted"> </small>
+              <p style={{ color: "#6c757d !important", textAlign: "start", fontSize: "12px" }} id="imageUrlHelp" className="form-text text-muted">Not required</p>
             </div>
           </>
         ) : null}

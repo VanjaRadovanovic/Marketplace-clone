@@ -1,0 +1,13 @@
+.homepage-container{
+  display: flex;
+  height: calc(100vh - 65.5px);
+}
+
+@media all and (max-width: 900px){
+  .homepage-container{
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}

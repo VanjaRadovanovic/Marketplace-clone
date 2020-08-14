@@ -6,3 +6,9 @@
 .bg-light{
   background-color: #FFFFFF !important;
 }
+
+@media all and (max-width: 900px){
+  .navbar{
+    box-shadow: 0 0 18px rgba(0, 0, 0, .2) !important;
+  }
+}
