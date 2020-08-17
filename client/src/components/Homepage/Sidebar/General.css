@@ -18,4 +18,5 @@
 
 .create-post-button:hover{
   background-color: #DAE6F2;
+  text-decoration: none;
 }

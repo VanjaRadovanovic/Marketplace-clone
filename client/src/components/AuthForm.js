@@ -4,6 +4,7 @@ import IsEmail from 'validator/lib/isEmail';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { SET_CURRENT_USER, GET_ALL_POSTS } from '../store/actionTypes';
+import { callApi } from '../store/actions/api';
 
 function AuthForm(props) {
 
@@ -84,7 +85,6 @@ function AuthForm(props) {
         password: formData.password
       }
     }
-    console.log(data, 'dataatatatata');
     setFormData({ ...formData, username: '', password: '', repeatPassword: '', imageUrl: '' });
     setErrOutline({});
     setErrMessages({});
@@ -99,7 +99,6 @@ function AuthForm(props) {
   const signingupUser = async (data) => {
     try {
       const user = await axios.post('/api/auth/signup', data);
-      console.log(user);
       dispatch({
         type: SET_CURRENT_USER,
         user: user.data
@@ -112,17 +111,15 @@ function AuthForm(props) {
   const loginginUser = async (data) => {
     try {
       const user = await axios.post('/api/auth/signin', data);
-      console.log(user.data.token);
       await dispatch({
         type: SET_CURRENT_USER,
         user: user.data
       });
+      let posts = await callApi('get', `/api/users/${user.data.id}/posts/allmessages`, {}, user.data.token);
       await dispatch({
         type: GET_ALL_POSTS,
-        id: user.data.id,
-        token: user.data.token
+        posts: posts
       })
-      console.log('redirecting')
     } catch (error) {
       console.log(error);
       setErrMessages({ ...errMessages, loginFailed: "Email or password are incorrect" });

@@ -4,7 +4,7 @@
   align-items: center;
   padding: 10px 20px 10px 10px;
   border-radius: 15px;
-  transition: background-color 150ms;
+  transition: background-color 400ms;
   margin-left: -10px;
 }
 
@@ -25,4 +25,5 @@
 .sidebar-element-container:hover{
   background-color: rgba(0, 0, 0, .07);
   cursor: pointer;
+  transition: background-color 50ms;
 }

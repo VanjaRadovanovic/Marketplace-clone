@@ -8,7 +8,10 @@ router.post('/', createPost);
 
 router.get('/allmessages', async (req, res) => {
   try {
-    let posts = await db.Post.find();
+    let posts = await db.Post.find().populate('user', {
+      username: true,
+      imageUrl: true
+    });
     res.status(200).json(posts);
   } catch (error) {
     next(error);

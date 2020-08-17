@@ -1,38 +1,19 @@
 import React from 'react';
 import './Main.css';
+import DisplayByCategory from './postsDisplay/DisplayByCategory';
+import { useSelector } from 'react-redux';
 
 function Main() {
+
+  const categories = useSelector(state => state.categories);
+
   return (
     <div className="main-posts-container">
-      Main area
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-      <h1>Main area</h1>
-
+      <DisplayByCategory />
+      <DisplayByCategory />
+      <DisplayByCategory />
+      <DisplayByCategory />
+      <DisplayByCategory />
     </div>
   )
 }

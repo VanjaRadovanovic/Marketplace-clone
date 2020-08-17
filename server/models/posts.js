@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const User = require('./user');
 
 const postSchema = new mongoose.Schema({
+  imageUrl: [{
+    type: String,
+    require: true
+  }],
   title: {
     type: String,
     required: true,

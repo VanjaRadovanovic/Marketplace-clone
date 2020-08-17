@@ -3,6 +3,7 @@ const db = require('../models');
 exports.createPost = async function (req, res, next) {
   try {
     let post = await db.Post.create({
+      imageUrl: req.body.imageUrl,
       title: req.body.title,
       price: req.body.price,
       category: req.body.category,

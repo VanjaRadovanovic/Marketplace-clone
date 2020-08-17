@@ -4,7 +4,6 @@ import axios from 'axios';
 
 
 export function callApi(method, path, data, token) {
-  console.log(token, 'token in api')
   const axiosPosts = axios.create({
     headers: {
       authorization: `Bearer ${token}`

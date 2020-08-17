@@ -1,0 +1,109 @@
+.file-input{
+  width: 0.1px;
+  height: 0.1px;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.photo-input-continer{
+  width: 100%;
+  min-height: 200px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-input-empty > label{
+  width: 100%;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
+.add-photo-button-empty{
+  padding: 5px 20px;
+  background-color: #E4E6EB;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.photo-input-empty > label:hover{
+  cursor: pointer;
+}
+
+.photo-input-empty > label:hover .add-photo-button-empty{
+  background-color: #D6D8DD;
+}
+
+.photo-input-warning{
+  text-align: start;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.image-preview-sidebar{
+  margin: 0 8px 10px 0;
+  width: 99px;
+  height: 99px;
+  display: grid;
+}
+
+.image-preview-sidebar > img{
+  width: inherit;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.img-preview-sidebar-container{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -10px;
+}
+
+.add-photo-button{
+  width: 100%;
+  height: 100%;
+  background-color: #E4E6EB;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.add-photo-button:hover{
+  background-color: #D4D6DB;
+  cursor: pointer;
+}
+
+.photo-input-just-button{
+  height: 100%;
+}
+
+.remove-photo-button{
+  position: absolute;
+  align-self: start;
+  justify-self: end;
+  border: none;
+  background-color: #E4E6EB;
+  margin: 5px 5px 0 0;
+  border-radius: 10px;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-photo-button:hover{
+  cursor: pointer;
+  background-color: #D4D6DB;
+}
+
+.add-photo-button small{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
