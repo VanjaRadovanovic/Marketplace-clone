@@ -10,7 +10,6 @@ function DisplayByCategory() {
 
   useEffect(() => {
     if (posts.length === 0) return;
-    console.log(posts, 'This are posts categories');
     let postJsx = posts.map((val) => (
       <Post data={val} key={val._id} />
     ))

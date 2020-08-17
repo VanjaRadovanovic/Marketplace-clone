@@ -4,11 +4,6 @@ import BookmarkIcon from '@material-ui/icons/Bookmark';
 
 
 function Post({ data }) {
-  console.log(data)
-  if (!data.imageUrl) {
-    data.imageUrl = 'https://748073e22e8db794416a-cc51ef6b37841580002827d4d94d19b6.ssl.cf3.rackcdn.com/not-found.png'
-  }
-
   return (
     <div className="card post-container" style={{ width: '100%' }}>
       <img src={data.imageUrl} className="card-img-top" alt="err" />
