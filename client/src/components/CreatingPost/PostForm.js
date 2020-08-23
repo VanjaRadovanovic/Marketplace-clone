@@ -7,7 +7,6 @@ import { TextareaAutosize } from '@material-ui/core';
 import { CHANGING_POSTS_FORM, ADD_POST } from '../../store/actionTypes';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-import faker from 'faker';
 
 function PostForm() {
 
@@ -26,17 +25,6 @@ function PostForm() {
     setCategoriesEl(categories.map((val, i) => (
       <option key={i}>{val}</option>
     )))
-    console.log(faker.commerce.productName(), 'faker name')
-    dispatch({
-      type: CHANGING_POSTS_FORM, formData: {
-        title: faker.commerce.productName(),
-        price: faker.commerce.price(),
-        location: faker.address.city(),
-        imageUrl: [faker.image.image()],
-        description: '',
-        category: 'Vehicles'
-      }
-    })
   }, [categories])
 
   const changingInput = (e, input) => {
@@ -70,7 +58,7 @@ function PostForm() {
   useEffect(() => {
     setImg(formData.imageUrl.map((val, i) => (
       <div className="image-preview-sidebar" key={i}>
-        <img src={val} alt="IMG" />
+        <img src={URL.createObjectURL(val)} alt="IMG" />
         <button className="remove-photo-button" onClick={e => removePhoto(e, val.name, formData)}><ClearIcon /></button>
       </div>
     )))
@@ -108,7 +96,7 @@ function PostForm() {
       if (buttonDisabled !== '') return;
 
       const form = new FormData();
-      formData.imageUrl.forEach(val => form.append('image', val))
+      formData.imageUrl.forEach(val => form.append('imageUrl', val))
       form.append('title', formData.title);
       form.append('price', formData.price);
       form.append('location', formData.location);

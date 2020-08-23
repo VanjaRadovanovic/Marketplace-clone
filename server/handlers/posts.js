@@ -5,7 +5,7 @@ exports.createPost = async function (req, res, next) {
     const url = req.protocol + '://' + req.get('host');
     console.log(req.body.imageUrl, 'requesting files')
     let post = await db.Post.create({
-      imageUrl: req.body.image,
+      imageUrl: req.files.map(val => url + '/public/' + val.filename),
       title: req.body.title,
       price: req.body.price,
       category: req.body.category,
