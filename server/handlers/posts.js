@@ -2,8 +2,10 @@ const db = require('../models');
 
 exports.createPost = async function (req, res, next) {
   try {
+    const url = req.protocol + '://' + req.get('host');
+    console.log(req.body.imageUrl, 'requesting files')
     let post = await db.Post.create({
-      imageUrl: req.body.imageUrl,
+      imageUrl: req.body.image,
       title: req.body.title,
       price: req.body.price,
       category: req.body.category,

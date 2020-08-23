@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const app = express();
-const bcript = require('bcrypt');
+const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const errorHandler = require('./handlers/error');
 const authRoutes = require('./routes/auth');
@@ -10,6 +10,7 @@ const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
 const db = require('./models');
 
 app.use(bodyParser.json());
+app.use('/public', express.static('public'));
 
 const PORT = process.env.PORT || 4000;
 

@@ -14,7 +14,7 @@
 
 @media all and (max-width: 900px){
   .sidebar-container{
-    height: 100px;
+    height: 130px;
     box-shadow: none;
     width: 100vw;
     background-color: #FFFFFF;
@@ -23,6 +23,7 @@
 
   .creating-post-height{
     height: 100% !important;
+    overflow: auto;
   }
 }
 

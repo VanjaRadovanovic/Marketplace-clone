@@ -2,9 +2,22 @@ const express = require('express');
 const router = express.Router({ mergeParams: true });
 const { createPost, getPost, deletePost } = require('../handlers/posts');
 const db = require('../models');
+const multer = require('multer');
+const uuidv4 = require('uuid');
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/');
+  },
+  // filename: (req, file, cb) => {
+  //   const fileName = file.originalname.toLowerCase().split(' ').join('-');
+  //   cb(null, fileName);
+  // }
+})
 
-router.post('/', createPost);
+const upload = multer({ storage: storage })
+
+router.post('/', upload.array('imageUrl'), createPost);
 
 router.get('/allmessages', async (req, res) => {
   try {

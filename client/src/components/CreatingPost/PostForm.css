@@ -19,6 +19,7 @@
   width: 100%;
   border: 1px solid #ced4da;
   border-radius: .25rem;
+  margin: 0;
 }
 
 .add-photo-button-empty{
@@ -111,4 +112,40 @@
 #description-input{
   resize: none;
   overflow: hidden;
+}
+
+#category-input:hover{
+  cursor:pointer;
+}
+
+#category-input option:hover{
+  cursor: pointer;
+}
+
+.warning-create-post{
+  margin: 0 0 0 2px;
+  color :#6C757D;
+  font-size: 13px;
+  text-align: start;
+}
+
+.button-disabled{
+  background-color: #E4E6EB;
+  color: #BCC0C4;
+  border: 1px solid #E4E6EB;
+}
+
+.button-disabled:hover{
+  cursor: not-allowed !important;
+  background-color: #E4E6EB;
+  color: #BCC0C4;
+  border: 1px solid #E4E6EB;
+}
+
+.button-disabled:focus{
+  cursor: not-allowed !important;
+  background-color: #E4E6EB !important;
+  color: #BCC0C4 !important;
+  border: 1px solid #E4E6EB !important;
+  box-shadow: none !important;
 }

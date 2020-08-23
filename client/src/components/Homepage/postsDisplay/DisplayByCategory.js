@@ -9,8 +9,8 @@ function DisplayByCategory() {
   const [post, setPost] = useState([]);
 
   useEffect(() => {
-    if (posts.length === 0) return;
-    let postJsx = posts.map((val) => (
+    if (posts === {}) return;
+    let postJsx = posts.vehicles.map((val) => (
       <Post data={val} key={val._id} />
     ))
     setPost(postJsx);
