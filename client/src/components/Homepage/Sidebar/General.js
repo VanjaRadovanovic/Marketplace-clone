@@ -6,11 +6,15 @@ import AddIcon from '@material-ui/icons/Add';
 import './General.css';
 import { Link } from 'react-router-dom';
 
-function General() {
+function General({ handleCategoryClick, selectedClass }) {
   return (
     <div>
-      <SidebarElement icon={<StoreIcon />} text="Browse all" />
-      <SidebarElement icon={<PersonIcon />} text="Your account" />
+      <Link to="/" className={selectedClass.all} onClick={e => handleCategoryClick(e, 'all')}>
+        <SidebarElement icon={<StoreIcon />} text="Browse all" />
+      </Link>
+      <Link to="/user/menu" className={selectedClass.myAccount} onClick={e => handleCategoryClick(e, 'myAccount')}>
+        <SidebarElement icon={<PersonIcon />} text="Your account" />
+      </Link>
       <Link to="/create-post" className="create-post-button">
         <AddIcon color='primary' /> <div>Add new post</div>
       </Link>

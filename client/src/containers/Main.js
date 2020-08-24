@@ -22,7 +22,10 @@ function Main() {
           isLoggedin ? <Redirect to="/" /> : <AuthForm buttonText="Log in" signup={false} {...props} />
         )} />
         <Route path="/create-post" render={props => (
-          isLoggedin ? <CreatePost {...props} /> : <Redirect to="signin" />
+          isLoggedin ? <CreatePost {...props} /> : <Redirect to="/signin" />
+        )} />
+        <Route path="/" render={props => (
+          isLoggedin ? <Homepage {...props} /> : <Redirect to="/signin" />
         )} />
       </Switch>
     </div>

@@ -4,6 +4,8 @@ import BookmarkIcon from '@material-ui/icons/Bookmark';
 
 
 function Post({ data }) {
+  console.log(data.imageUrl[0])
+
   return (
     <div className="card post-container" style={{ width: '100%' }}>
       <img src={data.imageUrl[0]} className="card-img-top" alt="err" />
@@ -11,7 +13,7 @@ function Post({ data }) {
         <button className="save-button-on-img"><BookmarkIcon /></button>
       </div>
       <div className="card-body">
-        <h5 className="card-title">{data.price}</h5>
+        <h5 className="card-title">{data.price} €</h5>
         <p className="card-text">{data.title}</p>
         <p className="location">{data.location}</p>
       </div>

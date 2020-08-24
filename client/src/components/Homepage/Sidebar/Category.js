@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import SidebarElement from './SidebarElement';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
@@ -13,21 +14,45 @@ import BuildIcon from '@material-ui/icons/Build';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import VideocamIcon from '@material-ui/icons/Videocam';
 
-function Category() {
+function Category({ handleCategoryClick, selectedClass }) {
   return (
     <div>
-      <SidebarElement icon={<DriveEtaIcon />} text='Vehicles' />
-      <SidebarElement icon={<HomeWorkIcon />} text='Real estate' />
-      <SidebarElement icon={<LocalOfferIcon />} text='Free stuff' />
-      <SidebarElement icon={<PhoneIphoneIcon />} text='Electronics' />
-      <SidebarElement icon={<StraightenIcon />} text='Musical instruments' />
-      <SidebarElement icon={<SportsEsportsIcon />} text='Games and toys' />
-      <SidebarElement icon={<HomeIcon />} text='Household supplies' />
-      <SidebarElement icon={<FavoriteIcon />} text='Family' />
-      <SidebarElement icon={<PetsIcon />} text='Pets' />
-      <SidebarElement icon={<BuildIcon />} text='Home decoration supplies' />
-      <SidebarElement icon={<DirectionsRunIcon />} text='Sports' />
-      <SidebarElement icon={<VideocamIcon />} text='Fun' />
+      <Link to="/vehicles" className={selectedClass.vehicles} onClick={e => handleCategoryClick(e, 'vehicles')}>
+        <SidebarElement icon={<DriveEtaIcon />} text='Vehicles' />
+      </Link>
+      <Link to="/real-estate" className={selectedClass.realEstate} onClick={e => handleCategoryClick(e, 'realEstate')}>
+        <SidebarElement icon={<HomeWorkIcon />} text='Real estate' />
+      </Link>
+      <Link to="/free-stuff" className={selectedClass.freeStuff} onClick={e => handleCategoryClick(e, 'freeStuff')}>
+        <SidebarElement icon={<LocalOfferIcon />} text='Free stuff' />
+      </Link>
+      <Link to="/electronics" className={selectedClass.electronics} onClick={e => handleCategoryClick(e, 'electronics')}>
+        <SidebarElement icon={<PhoneIphoneIcon />} text='Electronics' />
+      </Link>
+      <Link to="/musical-instruments" className={selectedClass.musicalInstruments} onClick={e => handleCategoryClick(e, 'musicalInstruments')}>
+        <SidebarElement icon={<StraightenIcon />} text='Musical instruments' />
+      </Link>
+      <Link to="/games-and-toys" className={selectedClass.gamesAndToys} onClick={e => handleCategoryClick(e, 'gamesAndToys')}>
+        <SidebarElement icon={<SportsEsportsIcon />} text='Games and toys' />
+      </Link>
+      <Link to="/household-supplies" className={selectedClass.householdSupplies} onClick={e => handleCategoryClick(e, 'householdSupplies')}>
+        <SidebarElement icon={<HomeIcon />} text='Household supplies' />
+      </Link>
+      <Link to="/family" className={selectedClass.family} onClick={e => handleCategoryClick(e, 'family')}>
+        <SidebarElement icon={<FavoriteIcon />} text='Family' />
+      </Link>
+      <Link to="/pets" className={selectedClass.pets} onClick={e => handleCategoryClick(e, 'pets')}>
+        <SidebarElement icon={<PetsIcon />} text='Pets' />
+      </Link>
+      <Link to="/home-decoration-supplies" className={selectedClass.homeDecorationSupplies} onClick={e => handleCategoryClick(e, 'homeDecorationSupplies')}>
+        <SidebarElement icon={<BuildIcon />} text='Home decoration supplies' />
+      </Link>
+      <Link to="/sports" className={selectedClass.sports} onClick={e => handleCategoryClick(e, 'sports')}>
+        <SidebarElement icon={<DirectionsRunIcon />} text='Sports' />
+      </Link>
+      <Link to="/fun" className={selectedClass.fun} onClick={e => handleCategoryClick(e, 'fun')}>
+        <SidebarElement icon={<VideocamIcon />} text='Fun' />
+      </Link>
     </div>
   )
 }

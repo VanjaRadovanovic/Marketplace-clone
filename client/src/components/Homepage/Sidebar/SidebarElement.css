@@ -27,3 +27,21 @@
   cursor: pointer;
   transition: background-color 50ms;
 }
+
+.selected-category > div{
+  background-color: #EAF3FF;
+}
+
+.selected-category .icon-wrapper{
+  background-color: #1877F2;
+  color: white;
+}
+
+.selected-category > div:hover{
+  background-color: #EAF3FF !important;
+}
+
+.selected-category:hover .icon-wrapper{
+  background-color: #1877F2 !important;
+  color: white !important;
+}
