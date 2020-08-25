@@ -24,6 +24,9 @@ function Main() {
         <Route path="/create-post" render={props => (
           isLoggedin ? <CreatePost {...props} /> : <Redirect to="/signin" />
         )} />
+        <Route path="/posts/" render={props => (
+          isLoggedin ? <h1>ninja</h1> : <Redirect to="/signin" />
+        )} />
         <Route path="/" render={props => (
           isLoggedin ? <Homepage {...props} /> : <Redirect to="/signin" />
         )} />

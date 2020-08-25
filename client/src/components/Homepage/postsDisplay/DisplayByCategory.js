@@ -6,6 +6,7 @@ import Post from './Post';
 function DisplayByCategory({ category, numItemsToDisplay }) {
 
   const posts = useSelector(state => state.posts.postsList);
+  const searchValue = useSelector(state => state.search.value);
   const [post, setPost] = useState([]);
   const numberOfItems = numItemsToDisplay;
 
@@ -25,10 +26,16 @@ function DisplayByCategory({ category, numItemsToDisplay }) {
       }
       return str;
     }).join('');
-    console.log(gettingCategory, 'getting category')
-    setPost(posts[gettingCategory].filter((val, i) => i < numberOfItems).map((val) => (
-      <Post data={val} key={val._id} />
-    )));
+    if (posts[gettingCategory] !== undefined) {
+      setPost(posts[gettingCategory].filter((val, i) => i < numberOfItems).map((val) => (
+        <Post data={val} key={val._id} />
+      )));
+    } else {
+      const filteredPosts = Object.values(posts).reduce((acc, val) => acc.concat(val.filter(val => val.title.toLowerCase().includes(searchValue.toLowerCase()))), []);
+      setPost(filteredPosts.map(val => (
+        <Post data={val} key={val._id} />
+      )))
+    }
   }, [posts, numberOfItems, category])
 
   return (

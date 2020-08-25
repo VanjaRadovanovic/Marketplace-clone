@@ -8,6 +8,7 @@ function Main() {
 
   const [categoriesArray, setCategoriesArray] = useState([]);
   const categories = useSelector(state => state.posts.categories);
+  const searchValue = useSelector(state => state.search.value);
 
   useEffect(() => {
     if (categories === undefined) return;
@@ -46,6 +47,7 @@ function Main() {
         <Route path="/home-decoration-supplies"><DisplayByCategory category="Home decoration supplies" numItemsToDisplay="20" /></Route>
         <Route path="/sports"><DisplayByCategory category="Sports" numItemsToDisplay="20" /></Route>
         <Route path="/fun"><DisplayByCategory category="Fun" numItemsToDisplay="20" /></Route>
+        <Route path="/search"><DisplayByCategory category={searchValue} numItemsToDisplay="20" /></Route>
       </Switch>
     </div>
   )
