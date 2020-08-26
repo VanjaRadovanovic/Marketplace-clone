@@ -15,7 +15,7 @@ const DEFAULT_STATE = {
 
 const filteringCategories = (posts) => {
   const filteredData = { vehicles: [], realEstate: [], freeStuff: [], electronics: [], musicalInstruments: [], gamesAndToys: [], householdSupplies: [], family: [], pets: [], homeDecorationSupplies: [], sports: [], fun: [] }
-  console.log(posts[4].category[0], 'category')
+  console.log(posts, 'sadasdafasdkngasjvnsčajnvsdačjnč')
   posts.forEach(val => {
     switch (val.category[0]) {
       case 'Vehicles':
@@ -27,7 +27,7 @@ const filteringCategories = (posts) => {
       case 'Free stuff':
         filteredData.freeStuff.push(val);
         break
-      case 'Electronics':
+      case 'Electronics' || 'electronics':
         filteredData.electronics.push(val);
         break
       case 'Musical instruments':
@@ -55,7 +55,7 @@ const filteringCategories = (posts) => {
         filteredData.pets.push(val);
         break
       default:
-
+        console.log(val.category[0], 'didnt go in category', val.category[0] === 'electronics')
     }
   })
   console.log(filteredData, 'filtered data')

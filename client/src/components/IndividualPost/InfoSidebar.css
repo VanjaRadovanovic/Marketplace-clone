@@ -1,10 +1,65 @@
 .info-sidebar-container{
-  background-color: red;
+  background-color: #FFF;
   width: 360px;
+  padding: 20px 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  height: calc(100vh - 65.5px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.info-sidebar-container p {
+  text-align: start;
+}
+
+.info-sidebar-container hr{
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+}
+
+.profile-image-container{
+  background-color: #F0F2F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  margin-left: 5px;
+  border-radius: 40px;
+}
+
+.profile-image-container .MuiSvgIcon-root{
+  font-size: 2.2rem !important;
+  color: #5E6266 !important;
+}
+
+.user-display{
+  display: flex;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.user-display p{
+  margin: 0 0 15px 15px;
+}
+
+.description-button{
+  display: inline-block;
+  font-weight: bold;
+  color: #55585C;
+}
+
+.description-button:hover{
+  cursor: pointer;
+  color: black;
 }
 
 @media all and (max-width: 880px){
   .info-sidebar-container{
     width: 100vw;
+    height: calc(100vh - 505.6px);
   }
 }

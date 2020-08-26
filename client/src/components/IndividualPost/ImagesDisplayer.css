@@ -22,6 +22,8 @@
   justify-self: center;
   border-radius: 5px;
   box-shadow:  0 0 53px rgba(255, 255, 255, .2);
+  margin-top: 15px;
+  bottom: 6%;
 }
 
 .all-images{
@@ -34,7 +36,8 @@
   border-radius: 10px;
   max-width: 50px;
   object-fit: cover;
-  opacity: .7;
+  opacity: .4;
+  box-shadow: 0 0 6px rgba(255, 255, 255, .6);
 }
 
 .all-images > img:hover{
@@ -67,16 +70,25 @@
   background-color: #DCDCDC;
 }
 
+.changing-images-buttons button:active{
+  transform: scale(.95);
+}
+
 @media all and (max-width: 880px){
   .image-displayer-container{
     width: 100vw;
+    height: 460px;
   }
   .main-image{
     max-width: 100%;
-    max-height: 100%;
+    height: auto;
+    max-height: 340px;
   }
   .background-image{
     width: 100%;
     height: auto
+  }
+  .changing-images-buttons{
+    display: none;
   }
 }

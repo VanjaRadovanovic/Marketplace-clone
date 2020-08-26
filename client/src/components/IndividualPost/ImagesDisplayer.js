@@ -8,21 +8,45 @@ function ImagesDisplayer({ data }) {
 
   const [allImages, setAllImages] = useState([]);
   const [mainImage, setMainImage] = useState('');
-  let imageCouner = 0;
+  let [imageCounter, setImageCounter] = useState(0);
 
   useEffect(() => {
     if (data.imageUrl.length === 0) return;
 
-    setMainImage(<img className="main-image" src={data.imageUrl[imageCouner]} alt="err" />)
+    changingImage(imageCounter);
 
+  }, [data])
+
+  const onButtonClickForward = (e) => {
+    if (imageCounter === data.imageUrl.length - 1) {
+      changingImage(0);
+      setImageCounter(0);
+    } else {
+      changingImage(imageCounter + 1);
+      setImageCounter(prevState => prevState + 1)
+    }
+  }
+
+  const onButtonClickBackward = (e) => {
+    if (imageCounter === 0) {
+      changingImage(data.imageUrl.length - 1);
+      setImageCounter(data.imageUrl.length - 1);
+    } else {
+      changingImage(imageCounter - 1);
+      setImageCounter(prevState => prevState - 1)
+    }
+  }
+
+  const changingImage = (count) => {
+    console.log(count, 'counter inside')
+    setMainImage(<img className="main-image" src={data.imageUrl[count]} alt="err" />)
     setAllImages(data.imageUrl.map((val, i) => {
-      if (i === imageCouner) {
+      if (i === count) {
         return <img className="image-list-item" style={{ opacity: '1' }} src={val} alt="err" />
       }
-      return <img className="image-list-item" src={val} alt="err" />
+      return <img className="image-list-item" src={val} alt="err" onClick={e => changingImage(i)} />
     }))
-
-  }, [data, imageCouner])
+  }
 
   return (
     <div className="image-displayer-container">
@@ -32,8 +56,8 @@ function ImagesDisplayer({ data }) {
         {allImages}
       </div>
       <div className="changing-images-buttons">
-        <button style={{ padding: '8px 5px 8px 12px' }}><ArrowBackIosIcon /></button>
-        <button><ArrowForwardIosIcon /></button>
+        <button style={{ padding: '8px 5px 8px 12px' }} onClick={onButtonClickBackward}><ArrowBackIosIcon /></button>
+        <button onClick={onButtonClickForward}><ArrowForwardIosIcon /></button>
       </div>
     </div>
   )

@@ -73,7 +73,6 @@ function PostForm() {
     if (formData.location.length === 0) return;
 
     setButtonDisabled('');
-    console.log('All ok in form')
   }
 
   const addingPhotos = (e) => {
@@ -117,7 +116,7 @@ function PostForm() {
       form.append('title', formData.title);
       form.append('price', formData.price);
       form.append('location', formData.location);
-      form.append('category', formData.category.toLowerCase());
+      form.append('category', formData.category);
       form.append('description', formData.description);
 
       let post = await axios.post(`/api/users/${currentUser.user.id}/posts/`, form, {
@@ -127,10 +126,8 @@ function PostForm() {
           'enctype': "multipart/form-data"
         }
       })
-      console.log(formData, 'incoming post');
       let category = gettingCategory()
-      let data = { ...formData, imageUrl: post.data.imageUrl, category: category }
-      await dispatch({ type: ADD_POST, post: { ...postsList, [data.category]: [...postsList[data.category], data] } });
+      await dispatch({ type: ADD_POST, post: { ...postsList, [category]: [...postsList[category], post.data] } });
       await dispatch({ type: CHANGING_POSTS_FORM, formData: { imageUrl: [], title: '', price: '', category: '', description: '', location: '' } })
       setSubmited(true);
     } catch (err) {

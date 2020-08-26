@@ -9,9 +9,10 @@ function Index() {
 
   const params = useParams();
   const postsList = useSelector(state => state.posts.postsList);
-  const [foundPost, setFoundPost] = useState({ imageUrl: '' });
+  const [foundPost, setFoundPost] = useState({ imageUrl: '', title: '', description: '', price: '', category: '', user: {} });
 
   useEffect(() => {
+    console.log(postsList, 'postsList')
     Object.values(postsList).forEach(val => {
       if (val.find(val => val._id === params.id) !== undefined) {
         setFoundPost(val.find(val => val._id === params.id))
@@ -23,7 +24,7 @@ function Index() {
   return (
     <div className="individual-post-container">
       <ImagesDisplayer data={foundPost} />
-      <InfoSidebar />
+      <InfoSidebar data={foundPost} />
     </div>
   )
 }
