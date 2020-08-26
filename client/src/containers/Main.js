@@ -4,6 +4,7 @@ import Homepage from '../components/Homepage/Homepage';
 import AuthForm from '../components/AuthForm';
 import { useSelector } from 'react-redux';
 import CreatePost from '../components/CreatingPost/CreatingPosts';
+import IndividualPost from '../components/IndividualPost/Index';
 
 function Main() {
 
@@ -24,8 +25,8 @@ function Main() {
         <Route path="/create-post" render={props => (
           isLoggedin ? <CreatePost {...props} /> : <Redirect to="/signin" />
         )} />
-        <Route path="/posts/" render={props => (
-          isLoggedin ? <h1>ninja</h1> : <Redirect to="/signin" />
+        <Route path="/posts/:id" render={props => (
+          isLoggedin ? <IndividualPost {...props} /> : <Redirect to="/signin" />
         )} />
         <Route path="/" render={props => (
           isLoggedin ? <Homepage {...props} /> : <Redirect to="/signin" />

@@ -1,0 +1,11 @@
+.individual-post-container{
+  height: calc(100vh - 65.6px);
+  width: 100vw;
+  display: flex;
+}
+
+@media all and (max-width: 880px){
+  .individual-post-container{
+    flex-direction: column;
+  } 
+}

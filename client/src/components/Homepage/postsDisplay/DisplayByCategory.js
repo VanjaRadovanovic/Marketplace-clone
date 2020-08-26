@@ -31,6 +31,7 @@ function DisplayByCategory({ category, numItemsToDisplay }) {
         <Post data={val} key={val._id} />
       )));
     } else {
+      console.log(posts, 'printing posts')
       const filteredPosts = Object.values(posts).reduce((acc, val) => acc.concat(val.filter(val => val.title.toLowerCase().includes(searchValue.toLowerCase()))), []);
       setPost(filteredPosts.map(val => (
         <Post data={val} key={val._id} />

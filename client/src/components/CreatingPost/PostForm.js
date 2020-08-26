@@ -90,6 +90,23 @@ function PostForm() {
     await dispatch({ type: CHANGING_POSTS_FORM, formData: { ...formData, imageUrl: filteredData } })
   }
 
+  const gettingCategory = () => {
+    return formData.category.split(' ').map((val, index) => {
+      if (index === 0) {
+        return val.toLowerCase();
+      }
+      let str;
+      for (var i = 0; i < val.length; i++) {
+        if (i === 0) {
+          str = val[i].toUpperCase();
+        } else {
+          str += val[i].toLowerCase();
+        }
+      }
+      return str;
+    }).join('');
+  }
+
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -100,7 +117,7 @@ function PostForm() {
       form.append('title', formData.title);
       form.append('price', formData.price);
       form.append('location', formData.location);
-      form.append('category', formData.category);
+      form.append('category', formData.category.toLowerCase());
       form.append('description', formData.description);
 
       let post = await axios.post(`/api/users/${currentUser.user.id}/posts/`, form, {
@@ -111,8 +128,9 @@ function PostForm() {
         }
       })
       console.log(formData, 'incoming post');
-      let data = { ...formData, imageUrl: post.data.imageUrl }
-      await dispatch({ type: ADD_POST, post: { ...postsList, [formData.category]: data } });
+      let category = gettingCategory()
+      let data = { ...formData, imageUrl: post.data.imageUrl, category: category }
+      await dispatch({ type: ADD_POST, post: { ...postsList, [data.category]: [...postsList[data.category], data] } });
       await dispatch({ type: CHANGING_POSTS_FORM, formData: { imageUrl: [], title: '', price: '', category: '', description: '', location: '' } })
       setSubmited(true);
     } catch (err) {
@@ -129,7 +147,7 @@ function PostForm() {
             {formData.imageUrl.length === 0 ? (
               <>
                 <label htmlFor="photo-input"><div className="photo-input-continer"><div className="add-photo-button-empty"><AddToPhotosIcon style={{ marginRight: '5px' }} />Add New Photo</div></div></label>
-                <input type="file" accept=".jgp, .jpeg, .png, .gif, .tiff, .psd, .eps, .ai, .raw, .indd" className="form-control-file file-input" id="photo-input" onChange={addingPhotos} />
+                <input type="file" accept=".jpg, .jpeg, .png, .gif, .tiff, .psd, .eps, .ai, .raw, .indd" className="form-control-file file-input" id="photo-input" onChange={addingPhotos} />
                 <p className="warning-create-post">Adding at least 1 photo is required</p>
               </>
             ) : (
@@ -138,7 +156,7 @@ function PostForm() {
                   {formData.imageUrl.length < 10 ? (
                     <div className="image-preview-sidebar">
                       <label className="photo-input-just-button" htmlFor="photo-input"><div className="add-photo-button"><small><AddToPhotosIcon />Add new photo</small></div></label>
-                      <input type="file" accept=".jgp, .jpeg, .png, .gif, .tiff, .psd, .eps, .ai, .raw, .indd" className="form-control-file file-input" id="photo-input" onChange={addingPhotos} />
+                      <input type="file" accept=".jpg, .jpeg, .png, .gif, .tiff, .psd, .eps, .ai, .raw, .indd" className="form-control-file file-input" id="photo-input" onChange={addingPhotos} />
                     </div>
                   ) : null}
                 </div>

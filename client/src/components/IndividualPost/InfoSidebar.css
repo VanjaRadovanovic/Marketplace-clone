@@ -1,0 +1,10 @@
+.info-sidebar-container{
+  background-color: red;
+  width: 360px;
+}
+
+@media all and (max-width: 880px){
+  .info-sidebar-container{
+    width: 100vw;
+  }
+}

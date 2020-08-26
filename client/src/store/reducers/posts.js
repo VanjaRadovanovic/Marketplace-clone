@@ -55,7 +55,7 @@ const filteringCategories = (posts) => {
         filteredData.pets.push(val);
         break
       default:
-        filteredData.vehicles.push(val)
+
     }
   })
   console.log(filteredData, 'filtered data')
