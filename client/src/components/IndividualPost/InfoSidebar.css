@@ -57,6 +57,13 @@
   color: black;
 }
 
+.profile-image{
+  width: 65.2px;
+  height: 65.2px;
+  object-fit: cover;
+  border-radius: 40px;
+}
+
 @media all and (max-width: 880px){
   .info-sidebar-container{
     width: 100vw;

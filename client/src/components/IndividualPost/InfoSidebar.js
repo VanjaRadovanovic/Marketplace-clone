@@ -3,6 +3,7 @@ import './InfoSidebar.css';
 import PersonIcon from '@material-ui/icons/Person';
 
 function InfoSidebar({ data }) {
+  console.log(data, 'datara')
   const [description, setDescription] = useState('');
 
   useEffect(() => {
@@ -43,7 +44,7 @@ function InfoSidebar({ data }) {
       <hr></hr>
       <div className="user-display">
         {data.user.profileImageUrl ? (
-          <img src={data.user.profileImageUrl} alt="err" />
+          <img className="profile-image" src={data.user.profileImageUrl} alt="err" />
         ) : (
             <div className="profile-image-container">
               <PersonIcon />

@@ -9,10 +9,6 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, './public/');
   },
-  // filename: (req, file, cb) => {
-  //   const fileName = file.originalname.toLowerCase().split(' ').join('-');
-  //   cb(null, fileName);
-  // }
 })
 
 const upload = multer({ storage: storage })
@@ -23,7 +19,8 @@ router.get('/allmessages', async (req, res) => {
   try {
     let posts = await db.Post.find().populate('user', {
       username: true,
-      imageUrl: true
+      profileImageUrl: true,
+      email: true
     });
     res.status(200).json(posts);
   } catch (error) {

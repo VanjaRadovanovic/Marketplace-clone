@@ -18,7 +18,7 @@ exports.createPost = async function (req, res, next) {
     await foundUser.save();
     let foundPost = await db.Post.findById(post._id).populate('user', {
       username: true,
-      profileImage: true
+      profileImageUrl: true
     })
     return res.status(200).json(foundPost);
   } catch (error) {

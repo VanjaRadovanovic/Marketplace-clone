@@ -75,8 +75,7 @@ function AuthForm(props) {
     if (props.signup) {
       if (!formData.username || !formData.password || !formData.repeatPassword || !formData.email) return requiredDataErr();
       if (formData.password !== formData.repeatPassword) return passwordsDontMach();
-      if (!formData.imageUrl)
-        data = formData;
+      data = formData;
       setFormData({ ...formData, email: '' })
     } else {
       if (!formData.password || !formData.email) return requiredDataErr()
@@ -85,7 +84,7 @@ function AuthForm(props) {
         password: formData.password
       }
     }
-    setFormData({ ...formData, username: '', password: '', repeatPassword: '', imageUrl: '' });
+    setFormData({ ...formData, username: '', password: '', repeatPassword: '', profileImageUrl: '' });
     setErrOutline({});
     setErrMessages({});
 
@@ -98,10 +97,16 @@ function AuthForm(props) {
 
   const signingupUser = async (data) => {
     try {
+      console.log(data, 'singup user')
       const user = await axios.post('/api/auth/signup', data);
       dispatch({
         type: SET_CURRENT_USER,
         user: user.data
+      })
+      let posts = await callApi('get', `/api/users/${user.data.id}/posts/allmessages`, {}, user.data.token);
+      await dispatch({
+        type: GET_ALL_POSTS,
+        posts: posts
       })
     } catch (error) {
       console.log(error);
@@ -137,7 +142,7 @@ function AuthForm(props) {
       setErrOutline({ ...errOutline, email: 'is-invalid' });
       return
     } else if (IsEmail(email)) {
-      let isTaken = takenData === {} ? takenData.emails.filter((val) => val === email).length > 0 : true;
+      let isTaken = takenData.emails !== undefined ? takenData.emails.filter((val) => val === email).length > 0 : true;
       if (isTaken && props.signup) {
         setErrMessages({ ...errMessages, email: 'This email is already taken' });
         setErrOutline({ ...errOutline, email: 'is-invalid' });
@@ -221,7 +226,7 @@ function AuthForm(props) {
             </div>
             <div className="form-group">
               <label htmlFor="imageUrl-label">Image Url</label>
-              <input type="text" className="form-control" id="imageUrl-label" value={formData.imageUrl} onChange={e => setFormData({ ...formData, imageUrl: e.target.value })} />
+              <input type="text" className="form-control" id="imageUrl-label" value={formData.profileImageUrl} onChange={e => setFormData({ ...formData, profileImageUrl: e.target.value })} />
               <p style={{ color: "#6c757d !important", textAlign: "start", fontSize: "12px" }} id="imageUrlHelp" className="form-text text-muted">Not required</p>
             </div>
           </>
