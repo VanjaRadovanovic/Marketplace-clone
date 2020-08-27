@@ -12,7 +12,7 @@ function SidebarMain() {
   const history = useHistory();
 
   const handleCategoryClick = (e, cat) => {
-    let categories = { search: '', all: '', myAccount: '', vehicles: '', realEstate: '', freeStuff: '', electronics: '', musicalInstruments: '', gamesAndToys: '', householdSupplies: '', family: '', pets: '', homeDecorationSupplies: '', sports: '', fun: '' };
+    let categories = { myPosts: '', bookmarks: '', search: '', all: '', myAccount: '', vehicles: '', realEstate: '', freeStuff: '', electronics: '', musicalInstruments: '', gamesAndToys: '', householdSupplies: '', family: '', pets: '', homeDecorationSupplies: '', sports: '', fun: '' };
     categories = { ...categories, [cat]: 'selected-category' }
     setSelectedClass(categories);
   }
@@ -29,7 +29,7 @@ function SidebarMain() {
 
   return (
     <>
-      <Search />
+      <Search handleCategoryClick={handleCategoryClick} selectedClass={selectedClass} />
       <div className="sidebar-overflow">
         <hr style={{ borderTop: '1px solid rgba(0,0,0,.15)', marginTop: '0' }} />
         <General handleCategoryClick={handleCategoryClick} selectedClass={selectedClass} />

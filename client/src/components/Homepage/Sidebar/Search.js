@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { CHANGING_SEARCH } from '../../../store/actionTypes';
 import { useDispatch, useSelector } from 'react-redux';
 
-function Search() {
+function Search({ handleCategoryClick, selectedClass }) {
 
   const dispatch = useDispatch();
   const inputValue = useSelector(state => state.search.value);
@@ -18,7 +18,7 @@ function Search() {
   return (
     <div className="search-container">
       <div className="search-icons">
-        <Link className="search-link" to="/">
+        <Link className={`search-link ${selectedClass.myAccount}`} to="/user/my-posts" onClick={e => handleCategoryClick(null, 'myAccount')}>
           <PersonIcon />
         </Link>
         <Link className="search-link" to="/create-post">Sell</Link>

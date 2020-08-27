@@ -33,11 +33,16 @@ function InfoSidebar({ data }) {
       {data.description ? (
         <>
           <h5>Description</h5>
-          {description.length > 304 ? (
-            <small style={{ textAlign: 'start' }} className="mb-2 ml-1">{description} <div className="description-button" onClick={e => croppingDescription()}>Less</div></small>
+          {data.description.length < 300 ? (
+            <small style={{ textAlign: 'start' }} className="mb-2 ml-1">{description}</small>
           ) : (
-              <small style={{ textAlign: 'start' }} className="mb-2 ml-1">{description} <div className="description-button" onClick={e => croppingDescription()}>More</div></small>
-            )}
+              <>
+                {description.length > 304 ? (
+                  <small style={{ textAlign: 'start' }} className="mb-2 ml-1">{description} <div className="description-button" onClick={e => croppingDescription()}>Less</div></small>
+                ) : (
+                    <small style={{ textAlign: 'start' }} className="mb-2 ml-1">{description} <div className="description-button" onClick={e => croppingDescription()}>More</div></small>
+                  )}
+              </>)}
         </>
       ) : null}
       <p style={{ fontWeight: '600', marginBottom: '0' }}>{data.location}</p>

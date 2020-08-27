@@ -66,7 +66,6 @@ export default (state = DEFAULT_STATE, action) => {
   switch (action.type) {
     case GET_ALL_POSTS:
       const posts = filteringCategories(action.posts)
-      console.log(posts, 'lalalalal')
       return {
         ...state,
         postsList: posts
@@ -77,11 +76,17 @@ export default (state = DEFAULT_STATE, action) => {
         postsList: action.post
       }
     case CHANGING_POSTS_FORM:
-      console.log(action.formData, 'action')
       return {
         ...state,
         postForm: action.formData
       }
+    case REMOVE_POST:
+      console.log(action, 'action')
+      return {
+        ...state,
+        postsList: action.postsList
+      }
+
     default:
       return state;
   }

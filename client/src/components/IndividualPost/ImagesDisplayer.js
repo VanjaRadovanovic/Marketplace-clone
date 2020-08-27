@@ -18,27 +18,16 @@ function ImagesDisplayer({ data }) {
   }, [data])
 
   const onButtonClickForward = (e) => {
-    if (imageCounter === data.imageUrl.length - 1) {
-      changingImage(0);
-      setImageCounter(0);
-    } else {
-      changingImage(imageCounter + 1);
-      setImageCounter(prevState => prevState + 1)
-    }
+    imageCounter === data.imageUrl.length - 1 ? changingImage(0) : changingImage(imageCounter + 1);
+
   }
 
   const onButtonClickBackward = (e) => {
-    if (imageCounter === 0) {
-      changingImage(data.imageUrl.length - 1);
-      setImageCounter(data.imageUrl.length - 1);
-    } else {
-      changingImage(imageCounter - 1);
-      setImageCounter(prevState => prevState - 1)
-    }
+    imageCounter === 0 ? changingImage(data.imageUrl.length - 1) : changingImage(imageCounter - 1);
   }
 
   const changingImage = (count) => {
-    console.log(count, 'counter inside')
+    setImageCounter(count)
     setMainImage(<img className="main-image" src={data.imageUrl[count]} alt="err" />)
     setAllImages(data.imageUrl.map((val, i) => {
       if (i === count) {

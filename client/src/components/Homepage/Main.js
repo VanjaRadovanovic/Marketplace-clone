@@ -3,6 +3,7 @@ import './Main.css';
 import DisplayByCategory from './postsDisplay/DisplayByCategory';
 import { useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
+import PostsList from '../User/PostsList';
 
 function Main() {
 
@@ -25,7 +26,6 @@ function Main() {
 
   const gettingCategories = () => {
     let filtered = shuffle(categories).filter((val, i) => i < 6);
-    console.log(filtered, 'filtered')
     setCategoriesArray(filtered.map(val => (
       <DisplayByCategory category={val} numItemsToDisplay="8" />
     )))
@@ -48,6 +48,8 @@ function Main() {
         <Route path="/sports"><DisplayByCategory category="Sports" numItemsToDisplay="20" /></Route>
         <Route path="/fun"><DisplayByCategory category="Fun" numItemsToDisplay="20" /></Route>
         <Route path="/search"><DisplayByCategory category={searchValue} numItemsToDisplay="20" /></Route>
+        <Route path="/user/my-posts"><PostsList /></Route>
+        <Route path="/user/bookmarks">My bookmarks</Route>
       </Switch>
     </div>
   )

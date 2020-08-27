@@ -36,6 +36,7 @@
   background-color: transparent;
   border: none;
   object-fit: cover;
+  word-wrap: anywhere;
 }
 
 .post-container:hover .img-overlay{

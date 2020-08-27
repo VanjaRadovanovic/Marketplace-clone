@@ -1,0 +1,131 @@
+.my-post-container{
+  width: 100%;
+  max-width: 800px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  justify-content: space-between;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
+
+.my-post-info{
+  align-self: flex-start;
+  display: flex;
+}
+
+.my-post-info > img{
+  height: 110px;
+  width: 110px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.my-post-info > div{
+  margin: 20px 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.my-post-info > div > h5,
+.my-post-info > div > h4{
+  margin: 0;
+  max-height: 30px;
+  overflow: hidden;
+  text-align: start;
+}
+
+.my-post-buttons{
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-post-buttons button{
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my-post-buttons p{
+  margin: 0 0 0 3px;
+}
+
+.update-button{
+  width: 60%;
+  height: 35px;
+  background-color: #E7F3FF;
+  color: #1377E8;
+}
+
+.update-button:hover{
+  background-color: #DAE6F2;
+}
+
+.delete-button{
+  background-color: #ffe3e3;
+}
+
+.delete-button:hover{
+  background-color: #f1d5d5;
+}
+
+.delete-button .MuiSvgIcon-root{
+  color: #e81313;
+}
+
+.deleting-popup{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleting-popup-container{
+  height: 120px;
+  width: 500px;
+  background-color: #FFF;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-between;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+}
+
+.deleting-popup-buttons{
+  display: flex;
+  justify-content: space-around;
+}
+
+.deleting-popup-buttons button{
+  border: none;
+  height: 35px;
+  width: 35%;
+  border-radius: 10px;
+}
+
+.deleting-popup-buttons button:hover{
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.popup-delete-button{
+  background-color: #ffd6d6;
+  color: #E81313;
+}
+
+.popup-delete-button:hover{
+  background-color: #ebc1c2 !important;
+}
+
+@media all and (max-width: 900px){
+  .my-post-container{
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+  }
+}

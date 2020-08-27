@@ -3,7 +3,7 @@ import './DisplayByCategory.css';
 import { useSelector } from 'react-redux';
 import Post from './Post';
 
-function DisplayByCategory({ category, numItemsToDisplay }) {
+function DisplayByCategory({ userCategory, category, numItemsToDisplay }) {
 
   const posts = useSelector(state => state.posts.postsList);
   const searchValue = useSelector(state => state.search.value);
