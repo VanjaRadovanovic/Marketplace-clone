@@ -37,6 +37,7 @@
   max-height: 30px;
   overflow: hidden;
   text-align: start;
+  word-wrap: anywhere;
 }
 
 .my-post-buttons{

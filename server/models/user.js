@@ -25,6 +25,10 @@ const userShema = new mongoose.Schema({
   posts: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: './posts.js'
+  }],
+  bookmarks: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: './posts.js'
   }]
 });
 

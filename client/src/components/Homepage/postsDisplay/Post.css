@@ -46,7 +46,7 @@
 
 .post-container:hover .save-button-on-img{
   opacity: 1;
-  transition: 250ms;
+  transition: opacity 250ms;
 }
 
 .img-overlay{

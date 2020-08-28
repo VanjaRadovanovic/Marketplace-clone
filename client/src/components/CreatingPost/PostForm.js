@@ -25,11 +25,12 @@ function PostForm() {
     setCategoriesEl(categories.map((val, i) => (
       <option key={i}>{val}</option>
     )))
+    dispatch({ type: CHANGING_POSTS_FORM, formData: { ...formData, category: categories[0] } })
   }, [categories])
 
   const changingInput = (e, input) => {
     if (input === 'price') {
-      if (isNaN(parseInt(e.target.value[e.target.value.length - 1]))) return;
+      if (isNaN(parseInt(e.target.value[e.target.value.length - 1])) && e.target.value !== '') return;
       setErrForm({ ...errForm, price: { message: 'Price cannot be grader then 999 999 999', outline: 'is-invalid' } })
       if (e.target.value > 999999999) return
     }
@@ -62,6 +63,7 @@ function PostForm() {
         <button className="remove-photo-button" onClick={e => removePhoto(e, val.name, formData)}><ClearIcon /></button>
       </div>
     )))
+    console.log('kata')
   }, [formData])
 
   const undesableSubmitCheck = (formData) => {
@@ -119,6 +121,8 @@ function PostForm() {
       form.append('category', formData.category);
       form.append('description', formData.description);
 
+      console.log(formData.category, categories[0])
+
       let post = await axios.post(`/api/users/${currentUser.user.id}/posts/`, form, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -137,7 +141,7 @@ function PostForm() {
 
   return (
     <div style={{ marginTop: '30px' }}>
-      <form onSubmit={onSubmit} enctype="multipart/form-data" action="/upload">
+      <form onSubmit={onSubmit} encType="multipart/form-data" action="/upload">
         <div className="form-group ">
           <p className="photo-input-warning">Photos :  {formData.imageUrl.length} / 10 - You can add no more then 10 photos.</p>
           <div className="photo-input-empty">

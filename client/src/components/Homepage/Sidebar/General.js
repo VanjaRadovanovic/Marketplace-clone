@@ -11,17 +11,17 @@ import { Link, Route } from 'react-router-dom';
 function General({ handleCategoryClick, selectedClass }) {
   return (
     <div>
-      <Link to="/" className={selectedClass.all} onClick={e => handleCategoryClick(e, 'all')}>
+      <Link to="/" className={selectedClass.all} onClick={e => handleCategoryClick(e, 'all', "/")}>
         <SidebarElement icon={<StoreIcon />} text="Browse all" />
       </Link>
-      <Link to="/user/my-posts" className={selectedClass.myAccount} onClick={e => handleCategoryClick(e, 'myAccount')}>
+      <Link to="/user/my-posts" className={selectedClass.myAccount} onClick={e => handleCategoryClick(e, 'myAccount', "/user/my-posts")}>
         <SidebarElement icon={<PersonIcon />} text="My account" />
       </Link>
       <Route path="/user/">
-        <Link to="/user/my-posts" className={selectedClass.myPosts} onClick={e => handleCategoryClick(e, 'myPosts')}>
+        <Link to="/user/my-posts" className={selectedClass.myPosts} onClick={e => handleCategoryClick(e, 'myPosts', "/user/my-posts")}>
           <SidebarElement icon={<LocalOfferIcon />} text="My posts" />
         </Link>
-        <Link to="/user/bookmarks" className={selectedClass.bookmarks} onClick={e => handleCategoryClick(e, 'bookmarks')}>
+        <Link to="/user/bookmarks" className={selectedClass.bookmarks} onClick={e => handleCategoryClick(e, 'bookmarks', "/user/bookmarks")}>
           <SidebarElement icon={<BookmarkIcon />} text="Bookmarks" />
         </Link>
       </Route>

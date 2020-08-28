@@ -28,6 +28,31 @@ router.get('/allmessages', async (req, res) => {
   }
 })
 
+router.post('/add-bookmark', async (req, res) => {
+  try {
+    let user = await db.User.findById(req.params.id);
+    user.bookmarks.push(req.body.postId);
+    await user.save();
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(err)
+    next(err);
+  }
+})
+
+router.post('/remove-bookmark', async (req, res) => {
+  try {
+    let user = await db.User.findById(req.params.id);
+    let arr = user.bookmarks.filter(val => val.toString() !== req.body.postId.toString());
+    user.bookmarks = arr;
+    await user.save();
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+})
+
 router.get('/:message_id', getPost);
 
 router.delete('/:message_id', deletePost);

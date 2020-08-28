@@ -39,15 +39,19 @@ function ImagesDisplayer({ data }) {
 
   return (
     <div className="image-displayer-container">
-      <img className="background-image" src={data.imageUrl[0]} alt="err" />
+      <div className="background-image-container">
+        <img className="background-image" src={data.imageUrl[imageCounter]} alt="err" />
+      </div>
       {mainImage}
       <div className="all-images">
         {allImages}
       </div>
-      <div className="changing-images-buttons">
-        <button style={{ padding: '8px 5px 8px 12px' }} onClick={onButtonClickBackward}><ArrowBackIosIcon /></button>
-        <button onClick={onButtonClickForward}><ArrowForwardIosIcon /></button>
-      </div>
+      {data.imageUrl.length > 0 ? (
+        <div className="changing-images-buttons">
+          <button style={{ padding: '8px 5px 8px 12px' }} onClick={onButtonClickBackward}><ArrowBackIosIcon /></button>
+          <button onClick={onButtonClickForward}><ArrowForwardIosIcon /></button>
+        </div>
+      ) : null}
     </div>
   )
 }

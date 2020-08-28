@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { SET_CURRENT_USER } from '../store/actionTypes';
+import { SET_CURRENT_USER, CHANGE_PATH } from '../store/actionTypes';
 
 export default function Navbar() {
 
@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <nav className="navbar sticky-top navbar-light bg-light pad2">
-      <Link to="/" className="navbar-brand">
+      <Link to="/" className="navbar-brand" onClick={e => dispatch({ type: CHANGE_PATH, history: { path: '/', class: 'all' } })}>
         Marketplace
       </Link>
 

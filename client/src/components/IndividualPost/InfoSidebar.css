@@ -64,6 +64,14 @@
   border-radius: 40px;
 }
 
+.location-data{
+  font-weight: 600;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media all and (max-width: 880px){
   .info-sidebar-container{
     width: 100vw;

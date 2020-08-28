@@ -12,7 +12,7 @@ function PostsList() {
     const filteredPosts = Object.values(allPosts).reduce((acc, val) => acc.concat(val.filter(val => val.user._id === currentUserId)), []);
     console.log(filteredPosts, 'filtered postss asdas ')
     setPosts(filteredPosts.map(val => (
-      <Post data={val} key={val.id} />
+      <Post data={val} key={val._id} />
     )))
   }, [currentUserId, allPosts])
 

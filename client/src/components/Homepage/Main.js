@@ -49,7 +49,7 @@ function Main() {
         <Route path="/fun"><DisplayByCategory category="Fun" numItemsToDisplay="20" /></Route>
         <Route path="/search"><DisplayByCategory category={searchValue} numItemsToDisplay="20" /></Route>
         <Route path="/user/my-posts"><PostsList /></Route>
-        <Route path="/user/bookmarks">My bookmarks</Route>
+        <Route path="/user/bookmarks"><DisplayByCategory bookmarks={true} category="" /></Route>
       </Switch>
     </div>
   )

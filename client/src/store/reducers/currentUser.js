@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from '../actionTypes';
+import { SET_CURRENT_USER, ADD_BOOKMARK, REMOVE_BOOKMARK } from '../actionTypes';
 
 const DEFAULT_STATE = {
   isAuthenticated: false,
@@ -11,6 +11,16 @@ export default (state = DEFAULT_STATE, action) => {
       return {
         isAuthenticated: !!Object.keys(action.user).length,
         user: action.user
+      }
+    case ADD_BOOKMARK:
+      return {
+        ...state,
+        user: { ...state.user, bookmarks: action.bookmarks }
+      }
+    case REMOVE_BOOKMARK:
+      return {
+        ...state,
+        user: { ...state.user, bookmarks: action.bookmarks }
       }
     default:
       return state;

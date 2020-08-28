@@ -5,7 +5,7 @@ import './Index.css';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-function Index() {
+function Index({ data }) {
 
   const params = useParams();
   const postsList = useSelector(state => state.posts.postsList);
@@ -13,13 +13,16 @@ function Index() {
 
   useEffect(() => {
     console.log(postsList, 'postsList')
-    Object.values(postsList).forEach(val => {
-      if (val.find(val => val._id === params.id) !== undefined) {
-        setFoundPost(val.find(val => val._id === params.id))
-      }
-    });
-    console.log(foundPost, 'found post in index')
-  }, [params.id])
+    if (data === undefined) {
+      Object.values(postsList).forEach(val => {
+        if (val.find(val => val._id === params.id) !== undefined) {
+          setFoundPost(val.find(val => val._id === params.id))
+        }
+      });
+    } else {
+      setFoundPost({ ...data, user: { name: 'paco' } })
+    }
+  }, [params.id, data])
 
   return (
     <div className="individual-post-container">

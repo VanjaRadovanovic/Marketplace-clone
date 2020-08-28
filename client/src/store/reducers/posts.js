@@ -1,4 +1,4 @@
-import { ADD_POST, REMOVE_POST, GET_ALL_POSTS, CHANGING_POSTS_FORM } from '../actionTypes';
+import { ADD_POST, REMOVE_POST, GET_ALL_POSTS, CHANGING_POSTS_FORM, CHANGE_PATH } from '../actionTypes';
 
 const DEFAULT_STATE = {
   postsList: { vehicles: [], realEstate: [], freeStuff: [], electronics: [], musicalInstruments: [], gamesAndToys: [], householdSupplies: [], family: [], pets: [], homeDecorationSupplies: [], sports: [], fun: [] },
@@ -7,9 +7,13 @@ const DEFAULT_STATE = {
     imageUrl: [],
     title: '',
     price: '',
-    category: 'Vehicle',
+    category: 'Vehicles',
     description: '',
     location: ''
+  },
+  history: {
+    path: '/',
+    class: 'all'
   }
 }
 
@@ -86,7 +90,11 @@ export default (state = DEFAULT_STATE, action) => {
         ...state,
         postsList: action.postsList
       }
-
+    case CHANGE_PATH:
+      return {
+        ...state,
+        history: action.history
+      }
     default:
       return state;
   }

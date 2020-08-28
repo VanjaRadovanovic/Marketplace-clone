@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './InfoSidebar.css';
 import PersonIcon from '@material-ui/icons/Person';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 function InfoSidebar({ data }) {
   console.log(data, 'datara')
@@ -8,8 +9,12 @@ function InfoSidebar({ data }) {
 
   useEffect(() => {
     if (data.description.length === 0) return
-
-    let str = data.description.substring(0, 300) + "..."
+    let str
+    if (data.description.length > 300) {
+      str = data.description.substring(0, 300) + "..."
+    } else {
+      str = data.description;
+    }
     setDescription(str)
 
   }, [data.description]);
@@ -26,7 +31,7 @@ function InfoSidebar({ data }) {
 
   return (
     <div className="info-sidebar-container">
-      <h3 style={{ marginBottom: '2px' }}>{data.title}</h3>
+      <h3 style={{ marginBottom: '2px', textAlign: 'start' }}>{data.title}</h3>
       <p style={{ fontSize: '17px', marginBottom: '0' }}>{data.price} €</p>
       <small>{data.category[0]}</small>
       <hr></hr>
@@ -45,7 +50,7 @@ function InfoSidebar({ data }) {
               </>)}
         </>
       ) : null}
-      <p style={{ fontWeight: '600', marginBottom: '0' }}>{data.location}</p>
+      <p className="location-data"><LocationOnIcon /> {data.location}</p>
       <hr></hr>
       <div className="user-display">
         {data.user.profileImageUrl ? (
