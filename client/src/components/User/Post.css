@@ -45,7 +45,8 @@
   justify-content: space-between;
 }
 
-.my-post-buttons button{
+.my-post-buttons button,
+.my-post-buttons a{
   border: none;
   border-radius: 10px;
   display: flex;

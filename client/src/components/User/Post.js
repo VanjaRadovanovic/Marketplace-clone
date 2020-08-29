@@ -3,9 +3,10 @@ import './Post.css';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Modal from 'react-modal';
-import { REMOVE_POST, GET_ALL_POSTS } from '../../store/actionTypes';
+import { REMOVE_POST } from '../../store/actionTypes';
 import { useSelector, useDispatch } from 'react-redux';
 import { callApi } from '../../store/actions/api';
+import { Link } from 'react-router-dom';
 
 function Post({ data }) {
 
@@ -18,9 +19,7 @@ function Post({ data }) {
     const category = gettingCategory(data.category[0])
     const filteredData = { ...postsList, [category]: postsList[category].filter(val => val._id !== data._id) };
     await dispatch({ type: REMOVE_POST, postsList: filteredData })
-    console.log(data.user._id, 'data before sending delete')
     const post = await callApi('delete', `/api/users/${currentUser.id}/posts/${data._id}`, {}, currentUser.token);
-    console.log(post, 'deleted post')
     await setModalIsOpen(false);
   }
 
@@ -52,7 +51,15 @@ function Post({ data }) {
         </div>
       </div>
       <div className="my-post-buttons">
-        <button className="update-button"><CreateIcon /><p>Update</p></button>
+        <Link className="update-button" to={{
+          pathname: `/user/my-posts/update/${data._id}`,
+          state: {
+            data,
+            update: true
+          }
+        }}>
+          <CreateIcon /><p>Update</p>
+        </Link>
         <button className="delete-button" onClick={e => setModalIsOpen(true)}><DeleteIcon /></button>
       </div>
       <Modal className="deleting-popup" isOpen={modalIsOpen}>

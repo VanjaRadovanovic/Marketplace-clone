@@ -4,7 +4,6 @@ import PersonIcon from '@material-ui/icons/Person';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 function InfoSidebar({ data }) {
-  console.log(data, 'datara')
   const [description, setDescription] = useState('');
 
   useEffect(() => {
@@ -20,7 +19,6 @@ function InfoSidebar({ data }) {
   }, [data.description]);
 
   const croppingDescription = () => {
-    console.log(description.length)
     if (description.length > 304) {
       let str = data.description.substring(0, 300) + "..."
       setDescription(str)

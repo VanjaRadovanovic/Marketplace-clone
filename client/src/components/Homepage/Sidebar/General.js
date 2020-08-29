@@ -25,7 +25,13 @@ function General({ handleCategoryClick, selectedClass }) {
           <SidebarElement icon={<BookmarkIcon />} text="Bookmarks" />
         </Link>
       </Route>
-      <Link to="/create-post" className="create-post-button">
+      <Link to={{
+        pathname: "/create-post",
+        state: {
+          update: false,
+          data: {}
+        }
+      }} className="create-post-button">
         <AddIcon color='primary' /> <div>Add new post</div>
       </Link>
     </div>

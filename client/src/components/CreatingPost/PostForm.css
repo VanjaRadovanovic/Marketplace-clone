@@ -203,3 +203,7 @@
 .preview-post .image-displayer-container{
   width: 60%;
 }
+
+.preview-post .main-image{
+  max-width: calc((100vw - 360px) * 0.48) !important;
+}

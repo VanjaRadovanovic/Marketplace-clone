@@ -4,11 +4,11 @@ import ClearIcon from '@material-ui/icons/Clear';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextareaAutosize } from '@material-ui/core';
-import { CHANGING_POSTS_FORM, ADD_POST } from '../../store/actionTypes';
+import { CHANGING_POSTS_FORM, ADD_POST, REMOVE_POST } from '../../store/actionTypes';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
-function PostForm() {
+function PostForm({ update, data }) {
 
   const [img, setImg] = useState('');
   const [categoriesEl, setCategoriesEl] = useState('');
@@ -22,11 +22,17 @@ function PostForm() {
   const [submited, setSubmited] = useState(false);
 
   useEffect(() => {
+    if (!update) return
+    dispatch({ type: CHANGING_POSTS_FORM, formData: data });
+    setButtonDisabled('');
+  }, [data])
+
+  useEffect(() => {
     setCategoriesEl(categories.map((val, i) => (
       <option key={i}>{val}</option>
     )))
     dispatch({ type: CHANGING_POSTS_FORM, formData: { ...formData, category: categories[0] } })
-  }, [categories])
+  }, [categories]);
 
   const changingInput = (e, input) => {
     if (input === 'price') {
@@ -57,13 +63,18 @@ function PostForm() {
   }
 
   useEffect(() => {
-    setImg(formData.imageUrl.map((val, i) => (
-      <div className="image-preview-sidebar" key={i}>
-        <img src={URL.createObjectURL(val)} alt="IMG" />
-        <button className="remove-photo-button" onClick={e => removePhoto(e, val.name, formData)}><ClearIcon /></button>
-      </div>
-    )))
-    console.log('kata')
+    setImg(formData.imageUrl.map((val, i) => {
+      let url;
+      if (val.name === undefined) {
+        url = val
+      } else {
+        url = URL.createObjectURL(val)
+      }
+      return (<div className="image-preview-sidebar" key={i}>
+        <img src={url} alt="IMG" />
+        <button type="button" className="remove-photo-button" onClick={e => removePhoto(e, val)}><ClearIcon /></button>
+      </div>)
+    }))
   }, [formData])
 
   const undesableSubmitCheck = (formData) => {
@@ -85,14 +96,19 @@ function PostForm() {
     undesableSubmitCheck(formDataModified);
   }
 
-  const removePhoto = async (e, name) => {
-    let filteredData = formData.imageUrl.filter((val) => val.name !== name);
+  const removePhoto = async (e, image) => {
+    let filteredData;
+    if (image.name === undefined) {
+      filteredData = formData.imageUrl.filter((val) => val !== image);
+    } else {
+      filteredData = formData.imageUrl.filter((val) => val.name !== image.name);
+    }
     undesableSubmitCheck({ ...formData, imageUrl: filteredData })
     await dispatch({ type: CHANGING_POSTS_FORM, formData: { ...formData, imageUrl: filteredData } })
   }
 
-  const gettingCategory = () => {
-    return formData.category.split(' ').map((val, index) => {
+  const gettingCategory = (cat) => {
+    return cat.split(' ').map((val, index) => {
       if (index === 0) {
         return val.toLowerCase();
       }
@@ -108,30 +124,57 @@ function PostForm() {
     }).join('');
   }
 
+  const newPostCallingApi = async (form) => {
+    let post = await axios.post(`/api/users/${currentUser.user.id}/posts/`, form, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        authorization: `Bearer ${currentUser.user.token}`,
+        'enctype': "multipart/form-data"
+      }
+    })
+    let category = gettingCategory(formData.category)
+    await dispatch({ type: ADD_POST, post: { ...postsList, [category]: [...postsList[category], post.data] } });
+  }
+
+  const updatingPost = async (form) => {
+    let post = await axios.put(`/api/users/${currentUser.user.id}/posts/${data._id}`, form, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        authorization: `Bearer ${currentUser.user.token}`,
+        'enctype': "multipart/form-data"
+      }
+    })
+    let category = gettingCategory(post.data.category[0])
+    let categoryPosts = postsList[category].filter(val => val._id !== post.data._id);
+    categoryPosts.push(post.data);
+    await dispatch({ type: REMOVE_POST, postsList: { ...postsList, [category]: categoryPosts } });
+  }
+
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
       if (buttonDisabled !== '') return;
 
       const form = new FormData();
-      formData.imageUrl.forEach(val => form.append('imageUrl', val))
+      formData.imageUrl.forEach(val => {
+        if (val.name !== undefined) {
+          form.append('imageUrl', val)
+        } else {
+          form.append('convertedImageUrls', val);
+        }
+      })
       form.append('title', formData.title);
       form.append('price', formData.price);
       form.append('location', formData.location);
       form.append('category', formData.category);
       form.append('description', formData.description);
 
-      console.log(formData.category, categories[0])
+      if (!update) {
+        newPostCallingApi(form)
+      } else {
+        updatingPost(form);
+      }
 
-      let post = await axios.post(`/api/users/${currentUser.user.id}/posts/`, form, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          authorization: `Bearer ${currentUser.user.token}`,
-          'enctype': "multipart/form-data"
-        }
-      })
-      let category = gettingCategory()
-      await dispatch({ type: ADD_POST, post: { ...postsList, [category]: [...postsList[category], post.data] } });
       await dispatch({ type: CHANGING_POSTS_FORM, formData: { imageUrl: [], title: '', price: '', category: '', description: '', location: '' } })
       setSubmited(true);
     } catch (err) {
@@ -192,7 +235,7 @@ function PostForm() {
           <label htmlFor="location-input">Location</label>
           <input type="text" className="form-control" id="location-input" value={formData.location} onChange={e => changingInput(e, 'location')} />
         </div>
-        <button style={{ padding: '5px 35px', margin: '10px 0 20px 0' }} className={`btn btn-primary ${buttonDisabled}`}>Post</button>
+        <button type="submit" style={{ padding: '5px 35px', margin: '10px 0 20px 0' }} className={`btn btn-primary ${buttonDisabled}`}>{update ? ('Update') : ('Post')}</button>
       </form>
       {submited ? (<Redirect to="/" />) : null}
     </div >

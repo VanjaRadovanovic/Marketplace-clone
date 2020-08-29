@@ -9,10 +9,11 @@ function Index({ data }) {
 
   const params = useParams();
   const postsList = useSelector(state => state.posts.postsList);
+  const currentUser = useSelector(state => state.currentUser.user)
   const [foundPost, setFoundPost] = useState({ imageUrl: '', title: '', description: '', price: '', category: '', user: {} });
+  const formData = useSelector(state => state.posts.postForm)
 
   useEffect(() => {
-    console.log(postsList, 'postsList')
     if (data === undefined) {
       Object.values(postsList).forEach(val => {
         if (val.find(val => val._id === params.id) !== undefined) {
@@ -20,9 +21,21 @@ function Index({ data }) {
         }
       });
     } else {
-      setFoundPost({ ...data, user: { name: 'paco' } })
+      setFoundPost({ ...data, user: { name: currentUser.username } })
     }
-  }, [params.id, data])
+  }, [params.id, data]);
+
+  useEffect(() => {
+    if (data === undefined || foundPost.category === '') return;
+    let modifiedData = {
+      ...data, imageUrl: data.imageUrl.map(val => val)
+    }
+    if (data.title === '') { modifiedData = { ...modifiedData, title: 'Title' } }
+    if (data.price === '') { modifiedData = { ...modifiedData, price: 'Price' } }
+    modifiedData = { ...modifiedData, category: [data.category] }
+    if (data.location === '') { modifiedData = { ...modifiedData, location: 'Location' } }
+    setFoundPost(modifiedData);
+  }, [formData])
 
   return (
     <div className="individual-post-container">

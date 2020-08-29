@@ -28,6 +28,31 @@ router.get('/allmessages', async (req, res) => {
   }
 })
 
+router.put('/:messageId', upload.array('imageUrl'), async (req, res) => {
+  try {
+    let post = await db.Post.findById(req.params.messageId).populate('user', { username: true, profileImageUrl: true });
+    const url = req.protocol + '://' + req.get('host');
+    let images;
+    if (req.body.convertedImageUrls.length > 10) {
+      images = [req.body.convertedImageUrls];
+    } else {
+      images = req.body.convertedImageUrls;
+    }
+    console.log(images, 'images')
+    req.files.forEach(val => images.push(url + '/public/' + val.filename))
+    post.imageUrl = images;
+    post.title = req.body.title;
+    post.price = req.body.price;
+    post.category = req.body.category;
+    post.description = req.body.description;
+    post.location = req.body.location;
+    await post.save();
+    res.status(200).json(post);
+  } catch (err) {
+    console.log(err, 'ERROR')
+  }
+});
+
 router.post('/add-bookmark', async (req, res) => {
   try {
     let user = await db.User.findById(req.params.id);

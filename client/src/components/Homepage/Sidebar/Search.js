@@ -33,7 +33,13 @@ function Search({ handleCategoryClick, selectedClass, setChooseCategoryPopup, ch
             <BookmarkIcon />
           </Link>
         </Route>
-        <Link className="search-link" to="/create-post">Sell</Link>
+        <Link className="search-link" to={{
+          pathname: "/create-post",
+          state: {
+            update: false,
+            data: {}
+          }
+        }}>Sell</Link>
         <p className="search-link" onClick={e => setChooseCategoryPopup(true)}>All Categories</p>
       </div>
       <h3 style={{ textAlign: 'start', paddingLeft: '5px' }}>Marketplace</h3>

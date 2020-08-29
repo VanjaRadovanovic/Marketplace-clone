@@ -25,8 +25,11 @@ function Main() {
         <Route path="/create-post" render={props => (
           isLoggedin ? <CreatePost {...props} /> : <Redirect to="/signin" />
         )} />
+        <Route path="/user/my-posts/update/:message_id" render={props => (
+          isLoggedin ? <CreatePost {...props} /> : <Redirect to="/signin" />
+        )} />
         <Route path="/posts/:id" render={props => (
-          isLoggedin ? <IndividualPost {...props} /> : <Redirect to="/signin" />
+          isLoggedin ? <IndividualPost update={true} {...props} /> : <Redirect to="/signin" />
         )} />
         <Route path="/" render={props => (
           isLoggedin ? <Homepage {...props} /> : <Redirect to="/signin" />

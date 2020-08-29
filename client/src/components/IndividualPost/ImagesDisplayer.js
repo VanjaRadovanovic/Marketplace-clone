@@ -12,9 +12,7 @@ function ImagesDisplayer({ data }) {
 
   useEffect(() => {
     if (data.imageUrl.length === 0) return;
-
     changingImage(imageCounter);
-
   }, [data])
 
   const onButtonClickForward = (e) => {
@@ -28,7 +26,7 @@ function ImagesDisplayer({ data }) {
 
   const changingImage = (count) => {
     setImageCounter(count)
-    setMainImage(<img className="main-image" src={data.imageUrl[count]} alt="err" />)
+    setMainImage(<img className="main-image" src={data.imageUrl[count] || null} alt="err" />)
     setAllImages(data.imageUrl.map((val, i) => {
       if (i === count) {
         return <img className="image-list-item" style={{ opacity: '1' }} src={val} alt="err" />

@@ -4,27 +4,37 @@ import PostForm from './PostForm';
 import Preview from '../IndividualPost/Index';
 import { useSelector } from 'react-redux';
 
-function CreatingPosts() {
+function CreatingPosts(props) {
 
   const formData = useSelector(state => state.posts.postForm);
-  const currentUser = useSelector(state => state.currentUser.user)
-  const [modifiedData, setModifiedData] = useState(formData);
+  const [modData, setModData] = useState(formData);
+  const { data, update } = props.location.state;
 
   useEffect(() => {
-    let modifiedData = { ...formData, imageUrl: formData.imageUrl.map(val => URL.createObjectURL(val)) };
-    if (formData.title === '') { modifiedData = { ...modifiedData, title: 'Title' } }
-    if (formData.price === '') { modifiedData = { ...modifiedData, price: 'Price' } }
-    modifiedData = { ...modifiedData, category: [formData.category] }
-    if (formData.location === '') { modifiedData = { ...modifiedData, location: 'Location' } }
-    console.log(formData, modifiedData)
-    setModifiedData(modifiedData)
-  }, [formData])
+    let modifiedData;
+    if (update === true && formData.title === '') {
+      modifiedData = {
+        ...data, imageUrl: data.imageUrl.map(val => {
+          if (val.name !== undefined) return URL.createObjectURL(val);
+          return val;
+        })
+      };
+      setModData(data);
+      return
+    }
+    setModData(modifiedData)
+  }, [data])
 
   return (
     <div style={{ height: 'calc(100vh - 65.6px)', display: 'flex', position: 'absolute', zIndex: '-2' }}>
-      <Sidebar toRender={<PostForm />} heightClass="creating-post-height" />
+      <Sidebar toRender={<PostForm data={modData} update={update} />} heightClass="creating-post-height" />
       <div className="preview-post">
-        <Preview data={modifiedData} />
+        <Preview data={{
+          ...formData, imageUrl: formData.imageUrl.map(val => {
+            if (val.name !== undefined) return URL.createObjectURL(val);
+            return val;
+          }), user: { name: '' }
+        }} />
       </div>
     </div>
   )

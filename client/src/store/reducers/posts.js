@@ -19,7 +19,6 @@ const DEFAULT_STATE = {
 
 const filteringCategories = (posts) => {
   const filteredData = { vehicles: [], realEstate: [], freeStuff: [], electronics: [], musicalInstruments: [], gamesAndToys: [], householdSupplies: [], family: [], pets: [], homeDecorationSupplies: [], sports: [], fun: [] }
-  console.log(posts, 'sadasdafasdkngasjvnsčajnvsdačjnč')
   posts.forEach(val => {
     switch (val.category[0]) {
       case 'Vehicles':
@@ -59,10 +58,9 @@ const filteringCategories = (posts) => {
         filteredData.pets.push(val);
         break
       default:
-        console.log(val.category[0], 'didnt go in category', val.category[0] === 'electronics')
+        break
     }
   })
-  console.log(filteredData, 'filtered data')
   return filteredData;
 }
 
@@ -85,7 +83,6 @@ export default (state = DEFAULT_STATE, action) => {
         postForm: action.formData
       }
     case REMOVE_POST:
-      console.log(action, 'action')
       return {
         ...state,
         postsList: action.postsList
@@ -93,7 +90,15 @@ export default (state = DEFAULT_STATE, action) => {
     case CHANGE_PATH:
       return {
         ...state,
-        history: action.history
+        history: action.history,
+        postForm: {
+          imageUrl: [],
+          title: '',
+          price: '',
+          category: 'Vehicles',
+          description: '',
+          location: ''
+        }
       }
     default:
       return state;
