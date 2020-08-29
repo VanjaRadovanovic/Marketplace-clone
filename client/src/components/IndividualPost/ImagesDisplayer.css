@@ -1,17 +1,27 @@
 .image-displayer-container{
   width: calc(100vw - 360px);
+  display: -ms-grid;
   display: grid;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-grid-rows: auto 80px;
   grid-template-rows: auto 80px;
 }
 
 .background-image{
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  filter: blur(20px);
-  transform: scale(110%)
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-filter: blur(20px);
+          filter: blur(20px);
+  -webkit-transform: scale(110%);
+      -ms-transform: scale(110%);
+          transform: scale(110%)
 }
 
 .background-image-container{
@@ -19,24 +29,32 @@
   z-index: -1;
   width: 100%;
   height: 84%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
 .main-image{
   max-width: 90%;
   max-height: 80%;
-  justify-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
   border-radius: 5px;
-  box-shadow:  0 0 53px rgba(255, 255, 255, .2);
+  -webkit-box-shadow:  0 0 53px rgba(255, 255, 255, .2);
+          box-shadow:  0 0 53px rgba(255, 255, 255, .2);
   margin-top: 15px;
   bottom: 6%;
 }
 
 .all-images{
   justify-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap-reverse;
+  -ms-flex-wrap: wrap-reverse;
+      flex-wrap: wrap-reverse;
   height: 70px;
 }
 
@@ -44,9 +62,11 @@
   margin: 5px;
   border-radius: 10px;
   max-width: 50px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   opacity: .4;
-  box-shadow: 0 0 6px rgba(255, 255, 255, .6);
+  -webkit-box-shadow: 0 0 6px rgba(255, 255, 255, .6);
+          box-shadow: 0 0 6px rgba(255, 255, 255, .6);
 }
 
 .all-images > img:hover{
@@ -59,16 +79,26 @@
 }
 
 .changing-images-buttons{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   position: absolute;
   width: inherit;
 }
 
 .changing-images-buttons button{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border: none;
   padding: 8px;
   margin: 0 5px;
@@ -80,7 +110,9 @@
 }
 
 .changing-images-buttons button:active{
-  transform: scale(.95);
+  -webkit-transform: scale(.95);
+      -ms-transform: scale(.95);
+          transform: scale(.95);
 }
 
 @media all and (max-width: 880px){

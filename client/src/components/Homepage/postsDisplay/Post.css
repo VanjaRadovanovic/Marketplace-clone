@@ -1,5 +1,6 @@
 .post-container{
-  justify-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
 }
 
 .post-container h5,
@@ -29,23 +30,29 @@
 .card-img-top{
   border-radius: 10px;
   height: 150px;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .card{
   background-color: transparent;
   border: none;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   word-wrap: anywhere;
 }
 
 .post-container:hover .img-overlay{
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(2,0,36,.4)), color-stop(32%, rgba(0,0,0,.4)), to(rgba(255,255,255,0)));
+  background: -o-linear-gradient(top, rgba(2,0,36,.4) 0%, rgba(0,0,0,.4) 32%, rgba(255,255,255,0) 100%);
   background: linear-gradient(180deg, rgba(2,0,36,.4) 0%, rgba(0,0,0,.4) 32%, rgba(255,255,255,0) 100%);
   cursor: pointer;
 }
 
 .post-container:hover .save-button-on-img{
   opacity: 1;
+  -webkit-transition: opacity 250ms;
+  -o-transition: opacity 250ms;
   transition: opacity 250ms;
 }
 
@@ -53,11 +60,21 @@
   position: absolute;
   border-radius: 10px;
   background: rgb(2,0,36);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(2,0,36,0)), color-stop(32%, rgba(0,0,0,0)), to(rgba(255,255,255,0)));
+  background: -o-linear-gradient(top, rgba(2,0,36,0) 0%, rgba(0,0,0,0) 32%, rgba(255,255,255,0) 100%);
   background: linear-gradient(180deg, rgba(2,0,36,0) 0%, rgba(0,0,0,0) 32%, rgba(255,255,255,0) 100%);
+  -webkit-transition: 150ms;
+  -o-transition: 150ms;
   transition: 150ms;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .save-button-on-img{
@@ -67,9 +84,15 @@
   margin: 5px 5px 0 0 ;
   border: none;
   border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .save-button-on-img:hover{

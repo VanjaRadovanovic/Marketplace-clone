@@ -3,11 +3,19 @@
   width: 100%;
   background-color: #E7F3FF;
   padding: 8px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border-radius: 10px;
   margin-top: 10px;
+  -webkit-transition: background-color 150ms;
+  -o-transition: background-color 150ms;
   transition: background-color 150ms;
 }
 

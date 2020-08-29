@@ -10,9 +10,15 @@
   width: 100%;
   min-height: 200px;
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .photo-input-empty > label{
@@ -26,8 +32,12 @@
   padding: 5px 20px;
   background-color: #E4E6EB;
   border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .photo-input-empty > label:hover{
@@ -48,19 +58,24 @@
   margin: 0 8px 10px 0;
   width: 99px;
   height: 99px;
+  display: -ms-grid;
   display: grid;
 }
 
 .image-preview-sidebar > img{
   width: inherit;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 10px;
 }
 
 .img-preview-sidebar-container{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   margin-right: -10px;
 }
 
@@ -68,8 +83,12 @@
   width: 100%;
   height: 100%;
   background-color: #E4E6EB;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 10px;
   border-radius: 10px;
 }
@@ -85,16 +104,23 @@
 
 .remove-photo-button{
   position: absolute;
-  align-self: start;
+  -ms-flex-item-align: start;
+      align-self: start;
   justify-self: end;
   border: none;
   background-color: #E4E6EB;
   margin: 5px 5px 0 0;
   border-radius: 10px;
   padding: 3px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .remove-photo-button:hover{
@@ -103,10 +129,19 @@
 }
 
 .add-photo-button small{
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #description-input{
@@ -147,7 +182,8 @@
   background-color: #E4E6EB !important;
   color: #BCC0C4 !important;
   border: 1px solid #E4E6EB !important;
-  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 
 @media all and (max-width: 900px){
@@ -159,9 +195,15 @@
 .preview-post{
   width: calc(100vw - 360px);
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: relative;
   z-index: -2;
 }
@@ -172,20 +214,24 @@
   background-color: #FFF;
   position: relative;
   z-index: -999;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .25);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .25);
+          box-shadow: 0 0 10px rgba(0, 0, 0, .25);
   word-wrap: anywhere;
 }
 
 .preview-post .info-sidebar-container{
   height: 100%;
   width: 40%;
-  box-shadow: -5px 0 10px rgba(0, 0, 0, .05);
+  -webkit-box-shadow: -5px 0 10px rgba(0, 0, 0, .05);
+          box-shadow: -5px 0 10px rgba(0, 0, 0, .05);
 }
 
 .preview-post .background-image{
   height: 100%;
   width: 100%;
-  transform: scale(1);
+  -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+          transform: scale(1);
 }
 
 .preview-post .background-image-container{
@@ -193,7 +239,8 @@
   height: 90%;
   padding: 20px;
   background-color: #FFF;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .preview-post .changing-images-buttons{
