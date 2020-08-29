@@ -28,11 +28,13 @@ function SidebarMain() {
     if (searchValue === '') {
       handleCategoryClick(null, pathHistory.class);
       history.push(`${pathHistory.path}`);
+    } else if (pathHistory.path === '/user/my-posts') {
+      history.push('/user/search');
     } else {
       handleCategoryClick(null, null);
       history.push("/search");
     }
-  }, [searchValue])
+  }, [searchValue]);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import './Search.css';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
@@ -16,11 +16,15 @@ function Search({ handleCategoryClick, selectedClass, setChooseCategoryPopup, ch
 
   const dispatch = useDispatch();
   const inputValue = useSelector(state => state.search.value);
-
+  const path = useSelector(state => state.posts.history.path)
 
   const searchOnChange = (e) => {
     dispatch({ type: CHANGING_SEARCH, value: e.target.value })
   }
+
+  useEffect(() => {
+    dispatch({ type: CHANGING_SEARCH, value: '' })
+  }, [path])
 
   return (
     <div className="search-container">
@@ -40,7 +44,7 @@ function Search({ handleCategoryClick, selectedClass, setChooseCategoryPopup, ch
             data: {}
           }
         }}>Sell</Link>
-        <p className="search-link" onClick={e => setChooseCategoryPopup(true)}>All Categories</p>
+        <p className="search-link" onClick={e => setChooseCategoryPopup(true)}>Categories</p>
       </div>
       <h3 style={{ textAlign: 'start', paddingLeft: '5px' }}>Marketplace</h3>
       <div className="sidebar-search">

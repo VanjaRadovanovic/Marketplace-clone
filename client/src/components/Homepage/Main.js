@@ -25,9 +25,9 @@ function Main() {
   }
 
   const gettingCategories = () => {
-    let filtered = shuffle(categories).filter((val, i) => i < 6);
-    setCategoriesArray(filtered.map(val => (
-      <DisplayByCategory category={val} numItemsToDisplay="8" />
+    let filtered = shuffle(categories).filter((val, i) => i < 12);
+    setCategoriesArray(filtered.map((val, i) => (
+      <DisplayByCategory category={val} key={i} numItemsToDisplay="8" />
     )))
   }
 
@@ -49,6 +49,7 @@ function Main() {
         <Route path="/fun"><DisplayByCategory category="Fun" numItemsToDisplay="20" /></Route>
         <Route path="/search"><DisplayByCategory category={searchValue} numItemsToDisplay="20" /></Route>
         <Route path="/user/my-posts"><PostsList /></Route>
+        <Route path="/user/search"><PostsList search={searchValue} /></Route>
         <Route path="/user/bookmarks"><DisplayByCategory bookmarks={true} category="" /></Route>
       </Switch>
     </div>

@@ -111,4 +111,12 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+  .search-icons .selected-category {
+    background-color: #1877F2;
+  }
+
+  .selected-category path{
+    color: white;
+  }
 }
