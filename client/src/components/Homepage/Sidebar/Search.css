@@ -54,7 +54,8 @@
 .category-popup-container{
   max-width: 500px;
   width: 100%;
-  height: auto;
+  height: 85%;
+  margin-top: 70px;
   background-color: #FFF;
   border-radius: 10px;
   padding: 10px 0 10px 10px;
@@ -67,6 +68,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  overflow-y: scroll;
 }
 
 .category-popup-container hr{
