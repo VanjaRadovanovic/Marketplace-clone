@@ -1,12 +1,9 @@
 Starting project
 
-cd Marketplace-clone
-
-cd client
+cd Marketplace-clone/client
 
 npm start
 
-
-cd server
+cd Marketplace-clone/server
 
 node index.js
