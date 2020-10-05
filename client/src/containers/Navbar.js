@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { SET_CURRENT_USER, CHANGE_PATH } from '../store/actionTypes';
+import Cookies from 'js-cookie';
 
 export default function Navbar() {
 
@@ -10,7 +11,8 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   const loggingOutUser = (e) => {
-    console.log('logging out user');
+    Cookies.remove('user');
+    console.log('cookie removed')
     dispatch({
       type: SET_CURRENT_USER,
       user: {}

@@ -14,7 +14,8 @@ exports.signup = async function (req, res, next) {
       id,
       username,
       profileImageUrl,
-      token
+      token,
+      bookmarks: []
     })
   } catch (error) {
     if (error.code === 11000) {
@@ -57,5 +58,24 @@ exports.login = async function (req, res, next) {
       message: "invalid Email/Password"
     });
   }
+}
 
+exports.verifyingCookie = function (req, res) {
+  let cookie = JSON.parse(req.cookies.user);
+  jwt.verify(cookie.token, process.env.SECRET_KEY, async (err, decoded) => {
+    try {
+      if (decoded && decoded.id === cookie.id) {
+        let user = await db.User.findOne({ _id: cookie.id });
+        res.status(200).json({
+          id: user._id,
+          username: user.username,
+          profileImageUrl: user.profileImageUrl,
+          token: req.body.token,
+          bookmarks: user.bookmarks
+        })
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  })
 }

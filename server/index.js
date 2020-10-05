@@ -8,9 +8,11 @@ const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/posts');
 const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
 const db = require('./models');
+const cookieParser = require('cookie-parser');
 
 app.use(bodyParser.json());
 app.use('/public', express.static('public'));
+app.use(cookieParser())
 
 const PORT = process.env.PORT || 4000;
 

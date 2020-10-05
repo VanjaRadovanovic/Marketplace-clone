@@ -1,4 +1,5 @@
 import { ADD_POST, REMOVE_POST, GET_ALL_POSTS, CHANGING_POSTS_FORM, CHANGE_PATH } from '../actionTypes';
+import Cookie from 'js-cookie';
 
 const DEFAULT_STATE = {
   postsList: { vehicles: [], realEstate: [], freeStuff: [], electronics: [], musicalInstruments: [], gamesAndToys: [], householdSupplies: [], family: [], pets: [], homeDecorationSupplies: [], sports: [], fun: [] },
@@ -88,6 +89,7 @@ export default (state = DEFAULT_STATE, action) => {
         postsList: action.postsList
       }
     case CHANGE_PATH:
+      Cookie.set('path', action.history, { expires: 9999999999 });
       return {
         ...state,
         history: action.history,

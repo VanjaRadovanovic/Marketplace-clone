@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { signup, login } = require('../handlers/auth');
+const { signup, login, verifyingCookie } = require('../handlers/auth');
 const db = require('../models')
+
+router.get('/verifying-cookie', verifyingCookie);
 
 router.post('/signup', signup);
 

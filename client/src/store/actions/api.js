@@ -6,7 +6,8 @@ import axios from 'axios';
 export function callApi(method, path, data, token) {
   const axiosPosts = axios.create({
     headers: {
-      authorization: `Bearer ${token}`
+      authorization: `Bearer ${token}`,
+      data: data
     }
   })
   return new Promise((resolve, reject) => {

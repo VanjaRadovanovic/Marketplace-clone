@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { SET_CURRENT_USER, GET_ALL_POSTS } from '../store/actionTypes';
 import { callApi } from '../store/actions/api';
+import Cookies from 'js-cookie';
 
 function AuthForm(props) {
 
@@ -13,6 +14,7 @@ function AuthForm(props) {
   const [errOutline, setErrOutline] = useState({})
   const [takenData, setTakenData] = useState({});
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -99,6 +101,8 @@ function AuthForm(props) {
     try {
       console.log(data, 'singup user')
       const user = await axios.post('/api/auth/signup', data);
+      await Cookies.set('user', { id: user.data.id, token: user.data.token, profileImageUrl: user.data.profileImageUrl, username: user.data.username, bookmarks: [] }, { expires: 1 });
+      console.log('cookie added')
       dispatch({
         type: SET_CURRENT_USER,
         user: user.data
@@ -116,6 +120,7 @@ function AuthForm(props) {
   const loginginUser = async (data) => {
     try {
       const user = await axios.post('/api/auth/signin', data);
+      Cookies.set('user', { id: user.data.id, token: user.data.token, profileImageUrl: user.data.profileImageUrl, username: user.data.username }, { expires: 1 });
       await dispatch({
         type: SET_CURRENT_USER,
         user: user.data

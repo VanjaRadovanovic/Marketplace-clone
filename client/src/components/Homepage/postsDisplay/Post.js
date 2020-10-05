@@ -14,6 +14,7 @@ function Post({ data }) {
   const [bookmarkedClass, setBookmarkedClass] = useState({ backgroundColor: '#FFF' });
 
   useEffect(() => {
+    if (currentUser.bookmarks === undefined) return;
     if (currentUser.bookmarks.some(val => val === data._id)) {
       setBookmarkedClass({ backgroundColor: '#1878EE', color: 'white', opacity: '1' })
     }
