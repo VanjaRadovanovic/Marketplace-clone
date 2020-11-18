@@ -9,12 +9,13 @@ const postRoutes = require('./routes/posts');
 const { loginRequired, ensureCorrectUser } = require('./middleware/auth');
 const db = require('./models');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 app.use(bodyParser.json());
 app.use('/public', express.static('public'));
 app.use(cookieParser())
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 
 app.use('/api/auth', authRoutes);
 
@@ -27,6 +28,13 @@ app.use('/api/posts', async function (req, res, next) {
   } catch (error) {
     next(error);
   }
+})
+
+app.use(express.static(path.join(__dirname, '/../client/build')))
+
+app.get('*', (req, res) => {
+  console.log('in here you little peace of shit')
+  res.sendFile(path.resolve(__dirname, '../', 'client', 'build', 'index.html'));
 })
 
 app.use(function (req, res, next) {
