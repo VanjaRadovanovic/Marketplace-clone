@@ -1,1 +1,1 @@
-deployed on https://marketplace-clone-client.herokuapp.com/
+deployed on https://vr-softdev.kreda.hr/marketplace-clone/
